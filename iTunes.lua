@@ -37,6 +37,7 @@ local randomSongLogicalSwitch = 64 -- Logical switch that will set the current s
 
 local playlistFilename = "/SOUNDS/playlist.txt"
 local errorOccured = false
+local screenUpdate = true
 
 local playingSong = 2
 local selection = 3
@@ -118,6 +119,7 @@ local function background()
 			if playingSong < #playlist - 2 then
 				playingSong = playingSong + 1
 				playSong()
+				screenUpdate = true
 			end
 		end
 	else
@@ -131,6 +133,7 @@ local function background()
 			if playingSong > 3 then
 				playingSong = playingSong - 1
 				playSong()
+				screenUpdate = true
 			end
 		end
 	else
@@ -143,6 +146,7 @@ local function background()
 			randomSongSwitchPressed = true
 			playingSong = getTime() % (#playlist - 4) + 3
 			playSong()
+			screenUpdate = true
 		end
 	else
 		randomSongSwitchPressed = false
@@ -154,46 +158,53 @@ local function run(event)
 	if (event == EVT_ROT_RIGHT or event == EVT_MINUS_FIRST or event == EVT_MINUS_RPT)
 		and selection < #playlist - 2 then
 		selection = selection + 1
+		screenUpdate = true
 	elseif (event == EVT_ROT_LEFT or event == EVT_PLUS_FIRST or event == EVT_PLUS_RPT) and selection > 3 then
 		selection = selection - 1
+		screenUpdate = true
 	elseif event == EVT_ROT_BREAK or event == EVT_ENTER_BREAK then -- Play selected song
 		playingSong = selection
 		playSong()
+		screenUpdate = true
 	end
 
 	-- DRAWING --
-	lcd.clear();
+	if screenUpdate or event == 191 then -- 191 is the event code when entering the telemetry screen
+		screenUpdate = false
 
-	-- Title
-	lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
-	lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
-	lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
+		lcd.clear();
 
-	-- Separator
-	lcd.drawLine(0, 16, LCD_W - 1, 16, SOLID, FORCE)
+		-- Title
+		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
+		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
+		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
 
-	-- Print error
-	if errorOccured then
-		yCoordinates = {18, 26, 34, 42, 50}
-		for i = 1, #errorStrings do
-			lcd.drawText(1, yCoordinates[i], errorStrings[i])
+		-- Separator
+		lcd.drawLine(0, 16, LCD_W - 1, 16, SOLID, FORCE)
+
+		-- Print error
+		if errorOccured then
+			yLine = {18, 26, 34, 42, 50}
+			for i = 1, #errorStrings do
+				lcd.drawText(1, yLine[i], errorStrings[i])
+			end
+
+			return
 		end
 
-		return
+		-- Now playing
+		lcd.drawText(1, 18, string.char(62) .. playlist[playingSong][1])
+
+		-- Separator
+		lcd.drawLine(0, 26, LCD_W - 1, 26, DOTTED, FORCE)
+
+		-- Song selector
+		lcd.drawText(1, 28, playlist[selection - 2][1], SMLSIZE)
+		lcd.drawText(3, 35, playlist[selection - 1][1], SMLSIZE)
+		lcd.drawText(1, 42, string.char(126) .. playlist[selection][1], SMLSIZE)
+		lcd.drawText(3, 49, playlist[selection + 1][1], SMLSIZE)
+		lcd.drawText(1, 56, playlist[selection + 2][1], SMLSIZE)
 	end
-
-	-- Now playing
-	lcd.drawText(1, 18, string.char(62) .. playlist[playingSong][1])
-
-	-- Separator
-	lcd.drawLine(0, 26, LCD_W - 1, 26, DOTTED, FORCE)
-
-	-- Song selector
-	lcd.drawText(1, 28, playlist[selection - 2][1], SMLSIZE)
-	lcd.drawText(3, 35, playlist[selection - 1][1], SMLSIZE)
-	lcd.drawText(1, 42, string.char(126) .. playlist[selection][1], SMLSIZE)
-	lcd.drawText(3, 49, playlist[selection + 1][1], SMLSIZE)
-	lcd.drawText(1, 56, playlist[selection + 2][1], SMLSIZE)
 end
 
 return {run = run, background = background, init = init}
