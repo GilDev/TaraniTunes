@@ -11,21 +11,22 @@ You need at least [OpenTX](http://www.open-tx.org) 2.2.
 * Taranis X9D  
   ![Taranis X9D](Screenshots/TaraniTunesX9D.png)
 
+English instructions
+--------------------
 
-Installation instructions
--------------------------
+### Installation
 
 **I will try to add a video explaining TaraniTunes' installation and usage in the future**
 
-The “[Example](Example)” folder contains an exemple of the Taranis' SD card structure you must follow. It works, you can, if you want, merge it with your Taranis' current SD card content.
+The “[Example](Example)” folder contains an exemple of the Taranis' SD card structure you must follow. It works, you can, if you want, merge it with your Taranis' current SD card content. You currently need to have at least 5 songs for the script to work.
 
 1. On your computer:
-	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences if needed then put iTunes.lua in `/SCRIPT/TELEMETRY`.
-	2. Create a [`playlist.txt`](Example/SOUNDS/playlist.txt) file in `/SOUNDS` where each line must be formatted like this: `Song name:SONG_FILENAME` where `SONG_FILENAME` must be 6 characters or less. Don't end the file with a newline! Look at [Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt) for an example of formatting.
-	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, where you put your other sound files). They must be encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org/) to do that, it works great.
+	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences if needed then put `iTunes.lua` in `/SCRIPT/TELEMETRY`.
+	2. Create a [`playlist.txt`](Example/SOUNDS/playlist.txt) file in `/SOUNDS` where each line must be formatted like this: `Song name:SONG_FILENAME` where `SONG_FILENAME` must be 6 characters or less. Don't end the file with a newline! Look at “[Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt)” for an example of formatting.
+	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the folder where you put your other sound files). They must be encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great.
 
-2. On your Taranis (I'm going to explain how I setup my radio)
-	1. Go to “DISPLAY” model's setting screen, set a screen to “Script” mode and choose “iTunes”.  
+2. On your Taranis (I'm going to explain how I setup my radio):
+	1. Set “DISPLAY” model's setting screen as follow:  
 	![Display settings](Screenshots/DisplaySettings.png)
 	2. Set “LOGICAL SWITCHES” model's setting screen as follow:  
 	![Logical switches settings](Screenshots/LogicalSwitchesSettings.png)
@@ -35,10 +36,10 @@ The “[Example](Example)” folder contains an exemple of the Taranis' SD card 
 
 There you go! Next section will explain you how to use TaraniTunes.
 
-Usage
------
 
-From the main menu, hold “Page” to access TaraniTunes. If everything has been setup correctly, your songs should appear, otherwise:
+### Usage
+
+From the main screen, hold “Page” to access TaraniTunes. If everything has been setup correctly, your songs should appear, otherwise:
 
 * If you modified your [`iTunes.lua`](iTunes.lua), maybe some configuration values are wrong.
 * The `playlist.txt` syntax may be wrong. Be sure to put the song name, then the colon “:”, then the song filename of 6 characters maximum. Also make sure there is no empty line at the end, or you will get a “CPU Limit” error, yeah I probably need to fix that…
@@ -47,8 +48,49 @@ From the main menu, hold “Page” to access TaraniTunes. If everything has bee
 2. Press “Enter” to choose a song to play.
 3. Put the “SD” switch in the middle position to start playing. Put it back in the up position to stop.
 4. If you select another song, you have to stop and start playback (“SD” up then center again). I'm sorry I can't do it any other way…
-5. Put “SD” in the down position to select a random song from your playlist. Stop and start playback to play it.
+5. Put “SD” in the down position to select a random song from your playlist then start playback again (“SD” in the center position).
 6. You can press throttle trims down and up to play next and previous song respectively. You still have to stop and start playback to play it.
+
+French instructions
+-------------------
+
+### Installation
+
+J'essaierai d'ajouter prochainement une vidéo expliquant l'installation et l'utilisation de TaraniTunes.
+
+Le dossier « [Example](Example) » contient un exemple de la structure de la carte SD que vous devez suivre. Ça marche, et vous pouvez, si vous le souhaitez, fusionner ce dossier avec le contenu actuel de la carte SD de votre Taranis. Vous devez pour l'instant avoir au moins 5 morceaux pour que le script marche.
+
+1. Sur votre ordinateur :
+
+1. Éditer [`iTunes.lua`](iTunes.lua) selon vos préférences, si nécessaire, et mettre ensuite `iTunes.lua` dans le dossier `/SCRIPT/TELEMETRY` ».
+2. Créer un fichier [`playlist.txt`](Example/SOUNDS/playlist.txt) dans `/SOUNDS` dans lequel chaque ligne doit suivre le format suivant : `Nom de la chanson:NOM_DU_FICHIER` où `NOM_DU_FICHIER` doit être 6 caractères maximum. Ne pas terminer le fichier avec un saut de ligne ! Regardez « [Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt) » pour un exemple de fichier correctement formaté.
+3. Mettre les morceaux correspondants `NOM_DU_FICHIER.wav` dans `/SOUNDS/fr` si votre radio est en français (sinon remplacez `fr` par votre langue, le dossier dans lequel vous placez vos autres sons). Ceux-ce doivent être encodés au format WAV Microsoft 16-bits non signé PCM à une fréquence d'échantillonnage de 32 kHz, comme les autres sons que vous utilisez. Vous pouvez utiliser [Audacity](http://www.audacityteam.org) pour faire ça, ça marche bien.
+
+2. Sur votre Taranis (je vais expliquer comment je règle ma radio, avec le fichier « iTunes.lua » non modifié) :
+
+1. Configurer l'écran de configuration du modèle « AFFICHAGE » comme ceci :  
+![Display settings](Screenshots/DisplaySettings.png)
+2. Configurer l'écran de configuration du modèle « INTERS LOGIQUES » comme ceci :  
+![Logical switches settings](Screenshots/LogicalSwitchesSettings.png)
+3. Configurer l'écran de configuration du modèle « PHASES DE VOL » comme ceci :  
+![Flight modes settings](Screenshots/FlightModesSettings.png)  
+Vous devez en fait régler chaque trim de gaz à « `--` » pour toutes les phases de vol que vous utilisez.
+
+Et voilà ! La section suivante va expliquer comment se servir de TaraniTunes.
+
+### Utilisation
+
+Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes. Si tout a été correctement configuré, vos morceaux devraient apparaître, sinon :
+
+* Si vous avez modifié votre [`iTunes.lua`](iTunes.lua), des valeurs de configurations sont peut-être erronées.
+* La syntaxe du fichier `playlist.txt` est peut-être incorrecte. Assurez-vous d'avoir écrit le nom du morceau, suivi de deux-points « : », suivi du nom du fichier de 6 caractères maximum. Faites également attention de ne pas avoir de saut de ligne à la fin du fichier sous peine d'avoir une erreur « CPU Limit ».
+
+1. Utilisez l'encodeur (Q X7) ou les boutons « + »/« - » pour naviguer dans vos morceaux.
+2. Appuyez sur « Enter » pour sélectionner un morceau à jouer.
+3. Mettez l'interrupteur « SD » en position centrale pour démarrer la lecture. Mettez-le en position haute pour arrêter.
+4. Si vous choisissez un autre morceau, vous devez arrêter et redémarrer la lecture (« SD » en haut puis à nouveau au centre). Je suis désolé on ne peut pas faire autrement…
+5. Mettez « SD » en position basse pour sélectionner un morceau aléatoire puis relancez la lecture (« SD » en position centrale).
+6. Vous pouvez utiliser le trim des gaz bas ou haut pour passer à la chanson suivante ou précédente respectivement. Vous devrez toujours relancer la lecture pour jouer la nouvelle musique.
 
 
 Todo
