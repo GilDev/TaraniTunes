@@ -4,7 +4,7 @@ TaraniTunes
 *Awesome music player for FrSky Taranis radios.*
 
 Compatible with FrSky's [Taranis Q X7](https://www.frsky-rc.com/product/taranis-q-x7-2), [Taranis X9D](https://www.frsky-rc.com/product/taranis-x9d-plus-2) and their variants.
-You need at least [OpenTX](http://www.open-tx.org) 2.2 with Lua scripts enabled (check "lua" when downloading firmware in [OpenTX Companion](http://www.open-tx.org/2017/05/30/opentx-2.2.0)).
+You need at least [OpenTX](http://www.open-tx.org) 2.2.
 
 * Taranis Q X7  
   ![Taranis Q X7](Screenshots/TaraniTunesQX7.png)
