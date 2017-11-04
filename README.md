@@ -14,9 +14,12 @@ You need at least [OpenTX](http://www.open-tx.org) 2.2.
 English instructions
 --------------------
 
-### Installation
+Here's a video explaining everything, from the installation to the usage:
 
-**I will try to add a video explaining TaraniTunes' installation and usage in the future**
+[![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
+
+
+### Installation
 
 The “[Example](Example)” folder contains an exemple of the Taranis' SD card structure you must follow. It works, you can, if you want, merge it with your Taranis' current SD card content. You currently need to have at least 5 songs for the script to work.
 
@@ -54,9 +57,12 @@ From the main screen, hold “Page” to access TaraniTunes. If everything has b
 French instructions
 -------------------
 
-### Installation
+Voici une vidéo en Anglais qui explique tout, de l'installation à l'utilisation :
 
-J'essaierai d'ajouter prochainement une vidéo expliquant l'installation et l'utilisation de TaraniTunes.
+[![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
+
+
+### Installation
 
 Le dossier « [Example](Example) » contient un exemple de la structure de la carte SD que vous devez suivre. Ça marche, et vous pouvez, si vous le souhaitez, fusionner ce dossier avec le contenu actuel de la carte SD de votre Taranis. Vous devez pour l'instant avoir au moins 5 morceaux pour que le script marche.
 
