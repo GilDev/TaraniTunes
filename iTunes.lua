@@ -95,7 +95,8 @@ local function init()
 		repeat
 			songFilename = songFilename .. char
 			char = io.read(playlistFile, 1)
-		until char == "\n" or char == ""
+		until char == "\n" or char == "\r" or char == ""
+		if char == "\r" then io.read(playlistFile, 1) end -- Discard newline character for Windows ending
 
 		playlist[#playlist + 1] = {songName, songFilename} -- table.insert() doesn't work
 
