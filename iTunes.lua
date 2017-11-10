@@ -42,6 +42,9 @@ local screenUpdate = true
 local playingSong = 2
 local selection = 3
 
+local songChanged = false
+local resetDone = false
+
 local function error(strings)
 	errorStrings = strings
 	errorOccured = true
@@ -54,6 +57,15 @@ function playSong()
 			switch = playSongSwitchId,
 			func = 16,
 			name = playlist[playingSong][2]
+		}
+	)
+end
+
+function resetSong()
+	model.setCustomFunction(
+		specialFunctionId,
+		{
+			switch = -playSongSwitchId
 		}
 	)
 end
@@ -112,14 +124,25 @@ end
 nextSongSwitchPressed   = false;
 prevSongSwitchPressed   = false;
 randomSongSwitchPressed = false;
-local function background()
-	-- Next song
+
+local function background()    
+    if resetDone then
+        playSong()
+        resetDone = false
+    end
+    
+    if songChanged then
+        resetSong()
+        songChanged = false
+        resetDone = true
+    end
+        -- Next song
 	if getValue(nextSongSwitchId) > 0 then
 		if not nextSongSwitchPressed then
 			nextSongSwitchPressed = true
 			if playingSong < #playlist - 2 then
 				playingSong = playingSong + 1
-				playSong()
+				songChanged = true
 				screenUpdate = true
 			end
 		end
@@ -133,7 +156,7 @@ local function background()
 			prevSongSwitchPressed = true
 			if playingSong > 3 then
 				playingSong = playingSong - 1
-				playSong()
+				songChanged = true
 				screenUpdate = true
 			end
 		end
@@ -146,7 +169,7 @@ local function background()
 		if not randomSongSwitchPressed then
 			randomSongSwitchPressed = true
 			playingSong = getTime() % (#playlist - 4) + 3
-			playSong()
+            songChanged = true
 			screenUpdate = true
 		end
 	else
@@ -165,7 +188,7 @@ local function run(event)
 		screenUpdate = true
 	elseif event == EVT_ROT_BREAK or event == EVT_ENTER_BREAK then -- Play selected song
 		playingSong = selection
-		playSong()
+		songChanged = true
 		screenUpdate = true
 	end
 
