@@ -125,18 +125,18 @@ nextSongSwitchPressed   = false;
 prevSongSwitchPressed   = false;
 randomSongSwitchPressed = false;
 
-local function background()    
-    if resetDone then
-        playSong()
-        resetDone = false
-    end
-    
-    if songChanged then
-        resetSong()
-        songChanged = false
-        resetDone = true
-    end
-        -- Next song
+local function background()
+	if resetDone then
+		playSong()
+		resetDone = false
+	end
+	
+	if songChanged then
+		resetSong()
+		songChanged = false
+		resetDone = true
+	end
+		-- Next song
 	if getValue(nextSongSwitchId) > 0 then
 		if not nextSongSwitchPressed then
 			nextSongSwitchPressed = true
@@ -169,7 +169,7 @@ local function background()
 		if not randomSongSwitchPressed then
 			randomSongSwitchPressed = true
 			playingSong = getTime() % (#playlist - 4) + 3
-            songChanged = true
+			songChanged = true
 			screenUpdate = true
 		end
 	else
