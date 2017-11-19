@@ -50,9 +50,8 @@ From the main screen, hold “Page” to access TaraniTunes. If everything has b
 1. Use the rotary encoder (Q X7) or the “+”/“-” buttons to sweep through songs.
 2. Press “Enter” to choose a song to play.
 3. Put the “SD” switch in the middle position to start playing. Put it back in the up position to stop.
-4. If you select another song, you have to stop and start playback (“SD” up then center again). I'm sorry I can't do it any other way…
-5. Put “SD” in the down position to select a random song from your playlist then start playback again (“SD” in the center position).
-6. You can press throttle trims down and up to play next and previous song respectively. You still have to stop and start playback to play it.
+4. Put “SD” in the down position to select a random song from your playlist.
+5. You can press throttle trims down and up to play next and previous song respectively.
 
 French instructions
 -------------------
@@ -94,9 +93,8 @@ Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes
 1. Utilisez l'encodeur (Q X7) ou les boutons « + »/« - » pour naviguer dans vos morceaux.
 2. Appuyez sur « Enter » pour sélectionner un morceau à jouer.
 3. Mettez l'interrupteur « SD » en position centrale pour démarrer la lecture. Mettez-le en position haute pour arrêter.
-4. Si vous choisissez un autre morceau, vous devez arrêter et redémarrer la lecture (« SD » en haut puis à nouveau au centre). Je suis désolé on ne peut pas faire autrement…
-5. Mettez « SD » en position basse pour sélectionner un morceau aléatoire puis relancez la lecture (« SD » en position centrale).
-6. Vous pouvez utiliser le trim des gaz bas ou haut pour passer à la chanson suivante ou précédente respectivement. Vous devrez toujours relancer la lecture pour jouer la nouvelle musique.
+4. Mettez « SD » en position basse pour sélectionner un morceau aléatoire.
+5. Vous pouvez utiliser le trim des gaz bas ou haut pour passer à la chanson suivante ou précédente respectivement.
 
 
 Todo
