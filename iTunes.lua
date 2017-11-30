@@ -38,6 +38,7 @@ local randomSongLogicalSwitch = 64 -- Logical switch that will set the current s
 local playlistFilename = "/SOUNDS/playlist.txt"
 local errorOccured = false
 local screenUpdate = true
+local nextScreenUpdate = false
 
 local playingSong = 2
 local selection = 3
@@ -140,6 +141,7 @@ local function background()
 	if getValue(nextSongSwitchId) > 0 then
 		if not nextSongSwitchPressed then
 			nextSongSwitchPressed = true
+			nextScreenUpdate = true
 			if playingSong < #playlist - 2 then
 				playingSong = playingSong + 1
 				songChanged = true
@@ -154,6 +156,7 @@ local function background()
 	if getValue(prevSongSwitchId) > 0 then
 		if not prevSongSwitchPressed then
 			prevSongSwitchPressed = true
+			nextScreenUpdate = true
 			if playingSong > 3 then
 				playingSong = playingSong - 1
 				songChanged = true
@@ -190,6 +193,9 @@ local function run(event)
 		playingSong = selection
 		songChanged = true
 		screenUpdate = true
+	elseif nextScreenUpdate then
+		selection = playingSong
+		nextScreenUpdate = false
 	end
 
 	-- DRAWING --
