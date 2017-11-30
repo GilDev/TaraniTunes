@@ -168,7 +168,7 @@ local function background()
 	if getValue(randomSongSwitchId) > 0 then
 		if not randomSongSwitchPressed then
 			randomSongSwitchPressed = true
-			playingSong = getTime() % (#playlist - 4) + 3
+			playingSong = math.random (3, #playlist - 2)
 			songChanged = true
 			screenUpdate = true
 		end
