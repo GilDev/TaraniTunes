@@ -40,7 +40,7 @@ local errorOccured = false
 local screenUpdate = true
 local nextScreenUpdate = false
 
-local playingSong = 2
+local playingSong = 3
 local selection = 3
 
 local songChanged = false
@@ -120,6 +120,10 @@ local function init()
 	-- These blank starting and ending values are used when selecting top or bottom songs
 	playlist[#playlist + 1] = {"", ""}
 	playlist[#playlist + 1] = {"", ""}
+	
+	nextScreenUpdate = true
+	screenUpdate = true
+	songChanged = true
 end
 
 nextSongSwitchPressed   = false;
@@ -178,6 +182,7 @@ local function background()
 			playingSong = math.random (3, #playlist - 2)
 			songChanged = true
 			screenUpdate = true
+			nextScreenUpdate = true
 		end
 	else
 		randomSongSwitchPressed = false
