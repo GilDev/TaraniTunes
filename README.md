@@ -100,7 +100,8 @@ Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes
 Todo
 ----
 
-* Automatically play next music after one is finished (maybe skip to next song when already 30 seconds have been played?)
+* Automatically play next music after the current one is finished (no idea how to do this).
+* Work on the “[playlist.txt](Example/SOUNDS/playlist.txt)” file, it looks like it crashes with too much songs. Maybe use a standard Lua table syntax.
 
 
 Suggestions for OpenTX's API
