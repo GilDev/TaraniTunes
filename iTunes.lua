@@ -38,8 +38,9 @@ local randomSongLogicalSwitch = 64 -- Logical switch that will set the current s
 local playlistFilename = "/SOUNDS/playlist.txt"
 local errorOccured = false
 local screenUpdate = true
+local nextScreenUpdate = false
 
-local playingSong = 2
+local playingSong = 3
 local selection = 3
 
 local songChanged = false
@@ -119,6 +120,10 @@ local function init()
 	-- These blank starting and ending values are used when selecting top or bottom songs
 	playlist[#playlist + 1] = {"", ""}
 	playlist[#playlist + 1] = {"", ""}
+	
+	nextScreenUpdate = true
+	screenUpdate = true
+	songChanged = true
 end
 
 nextSongSwitchPressed   = false;
@@ -140,10 +145,13 @@ local function background()
 	if getValue(nextSongSwitchId) > 0 then
 		if not nextSongSwitchPressed then
 			nextSongSwitchPressed = true
+			nextScreenUpdate = true
+			songChanged = true
+			screenUpdate = true
 			if playingSong < #playlist - 2 then
 				playingSong = playingSong + 1
-				songChanged = true
-				screenUpdate = true
+			else
+				playingSong = 3
 			end
 		end
 	else
@@ -154,10 +162,13 @@ local function background()
 	if getValue(prevSongSwitchId) > 0 then
 		if not prevSongSwitchPressed then
 			prevSongSwitchPressed = true
+			nextScreenUpdate = true
+			songChanged = true
+			screenUpdate = true
 			if playingSong > 3 then
 				playingSong = playingSong - 1
-				songChanged = true
-				screenUpdate = true
+			else
+				playingSong = #playlist - 2
 			end
 		end
 	else
@@ -168,9 +179,10 @@ local function background()
 	if getValue(randomSongSwitchId) > 0 then
 		if not randomSongSwitchPressed then
 			randomSongSwitchPressed = true
-			playingSong = getTime() % (#playlist - 4) + 3
+			playingSong = math.random (3, #playlist - 2)
 			songChanged = true
 			screenUpdate = true
+			nextScreenUpdate = true
 		end
 	else
 		randomSongSwitchPressed = false
@@ -183,13 +195,23 @@ local function run(event)
 		and selection < #playlist - 2 then
 		selection = selection + 1
 		screenUpdate = true
+	elseif (event == EVT_ROT_RIGHT or event == EVT_MINUS_FIRST or event == EVT_MINUS_RPT)
+		and selection == #playlist - 2 then
+		selection = 3
+		screenUpdate = true
 	elseif (event == EVT_ROT_LEFT or event == EVT_PLUS_FIRST or event == EVT_PLUS_RPT) and selection > 3 then
 		selection = selection - 1
+		screenUpdate = true
+	elseif (event == EVT_ROT_LEFT or event == EVT_PLUS_FIRST or event == EVT_PLUS_RPT) and selection == 3 then
+		selection = #playlist - 2
 		screenUpdate = true
 	elseif event == EVT_ROT_BREAK or event == EVT_ENTER_BREAK then -- Play selected song
 		playingSong = selection
 		songChanged = true
 		screenUpdate = true
+	elseif nextScreenUpdate then
+		selection = playingSong
+		nextScreenUpdate = false
 	end
 
 	-- DRAWING --
