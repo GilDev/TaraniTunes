@@ -35,13 +35,14 @@ local randomSongLogicalSwitch = 64 -- Logical switch that will set the current s
 
 -- DON'T EDIT BELOW THIS LINE --
 
-local playlistFilename = "/SOUNDS/playlist.txt"
+loadScript("/SOUNDS/playlist.lua")() -- Import playlist
+
 local errorOccured = false
 local screenUpdate = true
 local nextScreenUpdate = false
 
-local playingSong = 3
-local selection = 3
+local playingSong = 1
+local selection = 1
 
 local songChanged = false
 local resetDone = false
@@ -82,44 +83,6 @@ local function init()
 	nextSongSwitchId   = getFieldInfo("ls" .. nextSongLogicalSwitch).id
 	prevSongSwitchId   = getFieldInfo("ls" .. prevSongLogicalSwitch).id
 	randomSongSwitchId = getFieldInfo("ls" .. randomSongLogicalSwitch).id
-
-	-- Build playlist
-	playlist = {{"", ""}, {"", ""}}
-	playlistFile = io.open(playlistFilename, "r")
-
-	if (playlistFile == nil) then
-		error({"\"" .. playlistFilename .. "\"", "file not found, please", "read the \"README.md\"", "file for installation", "instructions."})
-		return
-	end
-	
-	repeat
-		songName = ""
-		songFilename = ""
-
-		-- Determine song name
-		char = ""
-		repeat
-			songName = songName .. char
-			char = io.read(playlistFile, 1)
-		until char == ":"
-
-		-- Determine song filename
-		char = ""
-		repeat
-			songFilename = songFilename .. char
-			char = io.read(playlistFile, 1)
-		until char == "\n" or char == "\r" or char == ""
-		if char == "\r" then io.read(playlistFile, 1) end -- Discard newline character for Windows ending
-
-		playlist[#playlist + 1] = {songName, songFilename} -- table.insert() doesn't work
-
-	until char == ""
-
-	io.close(playlistFile)
-
-	-- These blank starting and ending values are used when selecting top or bottom songs
-	playlist[#playlist + 1] = {"", ""}
-	playlist[#playlist + 1] = {"", ""}
 	
 	nextScreenUpdate = true
 	screenUpdate = true
@@ -141,17 +104,18 @@ local function background()
 		songChanged = false
 		resetDone = true
 	end
-		-- Next song
+
+	-- Next song
 	if getValue(nextSongSwitchId) > 0 then
 		if not nextSongSwitchPressed then
 			nextSongSwitchPressed = true
 			nextScreenUpdate = true
 			songChanged = true
 			screenUpdate = true
-			if playingSong < #playlist - 2 then
-				playingSong = playingSong + 1
+			if playingSong == #playlist then
+				playingSong = 1
 			else
-				playingSong = 3
+				playingSong = playingSong + 1
 			end
 		end
 	else
@@ -165,10 +129,10 @@ local function background()
 			nextScreenUpdate = true
 			songChanged = true
 			screenUpdate = true
-			if playingSong > 3 then
-				playingSong = playingSong - 1
+			if playingSong == 1 then
+				playingSong = #playlist
 			else
-				playingSong = #playlist - 2
+				playingSong = playingSong - 1
 			end
 		end
 	else
@@ -179,7 +143,7 @@ local function background()
 	if getValue(randomSongSwitchId) > 0 then
 		if not randomSongSwitchPressed then
 			randomSongSwitchPressed = true
-			playingSong = math.random (3, #playlist - 2)
+			playingSong = math.random (1, #playlist)
 			songChanged = true
 			screenUpdate = true
 			nextScreenUpdate = true
@@ -191,19 +155,21 @@ end
 
 local function run(event)
 	-- INPUT HANDLING --
-	if (event == EVT_ROT_RIGHT or event == EVT_MINUS_FIRST or event == EVT_MINUS_RPT)
-		and selection < #playlist - 2 then
-		selection = selection + 1
+	if (event == EVT_ROT_RIGHT or event == EVT_MINUS_FIRST or event == EVT_MINUS_RPT) then
+		if selection == #playlist then
+			selection = 1
+		else
+			selection = selection + 1
+		end
+
 		screenUpdate = true
-	elseif (event == EVT_ROT_RIGHT or event == EVT_MINUS_FIRST or event == EVT_MINUS_RPT)
-		and selection == #playlist - 2 then
-		selection = 3
-		screenUpdate = true
-	elseif (event == EVT_ROT_LEFT or event == EVT_PLUS_FIRST or event == EVT_PLUS_RPT) and selection > 3 then
-		selection = selection - 1
-		screenUpdate = true
-	elseif (event == EVT_ROT_LEFT or event == EVT_PLUS_FIRST or event == EVT_PLUS_RPT) and selection == 3 then
-		selection = #playlist - 2
+	elseif (event == EVT_ROT_LEFT or event == EVT_PLUS_FIRST or event == EVT_PLUS_RPT) then
+		if selection == 1 then
+			selection = #playlist
+		else
+			selection = selection - 1
+		end
+
 		screenUpdate = true
 	elseif event == EVT_ROT_BREAK or event == EVT_ENTER_BREAK then -- Play selected song
 		playingSong = selection
@@ -245,11 +211,11 @@ local function run(event)
 		lcd.drawLine(0, 26, LCD_W - 1, 26, DOTTED, FORCE)
 
 		-- Song selector
-		lcd.drawText(1, 28, playlist[selection - 2][1], SMLSIZE)
-		lcd.drawText(3, 35, playlist[selection - 1][1], SMLSIZE)
-		lcd.drawText(1, 42, string.char(126) .. playlist[selection][1], SMLSIZE)
-		lcd.drawText(3, 49, playlist[selection + 1][1], SMLSIZE)
-		lcd.drawText(1, 56, playlist[selection + 2][1], SMLSIZE)
+		if playlist[selection - 2] then lcd.drawText(1, 28, playlist[selection - 2][1], SMLSIZE) end
+		if playlist[selection - 1] then lcd.drawText(3, 35, playlist[selection - 1][1], SMLSIZE) end
+		if playlist[selection]     then lcd.drawText(1, 42, string.char(126) .. playlist[selection][1], SMLSIZE) end
+		if playlist[selection + 1] then lcd.drawText(3, 49, playlist[selection + 1][1], SMLSIZE) end
+		if playlist[selection + 2] then lcd.drawText(1, 56, playlist[selection + 2][1], SMLSIZE) end
 	end
 end
 

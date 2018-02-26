@@ -18,6 +18,8 @@ Here's a video explaining everything, from the installation to the usage:
 
 [![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
 
+The installation process changed a bit, principaly the `playlist.txt` syntax. Please refer to the following instructions.
+
 
 ### Installation
 
@@ -25,7 +27,7 @@ The “[Example](Example)” folder contains an exemple of the Taranis' SD card 
 
 1. On your computer:
 	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences if needed then put `iTunes.lua` in `/SCRIPT/TELEMETRY`.
-	2. Create a [`playlist.txt`](Example/SOUNDS/playlist.txt) file in `/SOUNDS` where each line must be formatted like this: `Song name:SONG_FILENAME` where `SONG_FILENAME` must be 6 characters or less. Don't end the file with a newline! Look at “[Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt)” for an example of formatting.
+	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.txt) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME"},` where `SONG_FILENAME` must be 6 characters or less. Look at “[Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt)” for an example of formatting.
 	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great.
 
 2. On your Taranis (I'm going to explain how I setup my radio):
@@ -45,7 +47,7 @@ There you go! Next section will explain you how to use TaraniTunes.
 From the main screen, hold “Page” to access TaraniTunes. If everything has been setup correctly, your songs should appear, otherwise:
 
 * If you modified your [`iTunes.lua`](iTunes.lua), maybe some configuration values are wrong.
-* The `playlist.txt` syntax may be wrong. Be sure to put the song name, then the colon “:”, then the song filename of 6 characters maximum. Also make sure there is no empty line at the end, or you will get a “CPU Limit” error, yeah I probably need to fix that…
+* The `playlist.lua` syntax may be wrong. Please check that.
 
 1. Use the rotary encoder (Q X7) or the “+”/“-” buttons to sweep through songs.
 2. Press “Enter” to choose a song to play.
@@ -60,6 +62,8 @@ Voici une vidéo en Anglais qui explique tout, de l'installation à l'utilisatio
 
 [![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
 
+Le processus d'installation a légèrement changé, notamment la syntaxe du fichier `playlist.txt`. Veuillez vous référer aux instructions suivantes.
+
 
 ### Installation
 
@@ -68,7 +72,7 @@ Le dossier « [Example](Example) » contient un exemple de la structure de l
 1. Sur votre ordinateur :
 
 1. Éditer [`iTunes.lua`](iTunes.lua) selon vos préférences, si nécessaire, et mettre ensuite `iTunes.lua` dans le dossier `/SCRIPT/TELEMETRY` ».
-2. Créer un fichier [`playlist.txt`](Example/SOUNDS/playlist.txt) dans `/SOUNDS` dans lequel chaque ligne doit suivre le format suivant : `Nom de la chanson:NOM_DU_FICHIER` où `NOM_DU_FICHIER` doit être 6 caractères maximum. Ne pas terminer le fichier avec un saut de ligne ! Regardez « [Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt) » pour un exemple de fichier correctement formaté.
+2. Créer un fichier [`playlist.lua`](Example/SOUNDS/playlist.txt) dans `/SOUNDS` dans lequel chaque ligne doit suivre le format suivant : `{"Nom du morceau", "NOM_DU_FICHIER"},` où `NOM_DU_FICHIER` doit faire 6 caractères maximum. Regardez « [Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt) » pour un exemple de fichier correctement formaté.
 3. Mettre les morceaux correspondants `NOM_DU_FICHIER.wav` dans `/SOUNDS/fr` si votre radio est en français (sinon remplacez `fr` par votre langue, le dossier dans lequel vous placez vos autres sons). Ceux-ci doivent être converti en mono, préférablement normalisés, et encodés au format WAV Microsoft 16-bits non signé PCM à une fréquence d'échantillonnage de 32 kHz, comme les autres sons que vous utilisez. Vous pouvez utiliser [Audacity](http://www.audacityteam.org) pour faire ça, ça marche bien.
 
 2. Sur votre Taranis (je vais expliquer comment je règle ma radio, avec le fichier « iTunes.lua » non modifié) :
@@ -88,7 +92,7 @@ Et voilà ! La section suivante va expliquer comment se servir de TaraniTunes.
 Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes. Si tout a été correctement configuré, vos morceaux devraient apparaître, sinon :
 
 * Si vous avez modifié votre [`iTunes.lua`](iTunes.lua), des valeurs de configurations sont peut-être erronées.
-* La syntaxe du fichier `playlist.txt` est peut-être incorrecte. Assurez-vous d'avoir écrit le nom du morceau, suivi de deux-points « : », suivi du nom du fichier de 6 caractères maximum. Faites également attention de ne pas avoir de saut de ligne à la fin du fichier sous peine d'avoir une erreur « CPU Limit ».
+* La syntaxe du fichier `playlist.txt` est peut-être incorrecte. Vérifiez-la.
 
 1. Utilisez l'encodeur (Q X7) ou les boutons « + »/« - » pour naviguer dans vos morceaux.
 2. Appuyez sur « Enter » pour sélectionner un morceau à jouer.
@@ -101,7 +105,6 @@ Todo
 ----
 
 * Automatically play next music after the current one is finished (no idea how to do this).
-* Work on the “[playlist.txt](Example/SOUNDS/playlist.txt)” file, it looks like it crashes with too much songs. Maybe use a standard Lua table syntax.
 
 
 Suggestions for OpenTX's API
