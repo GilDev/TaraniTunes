@@ -7,31 +7,42 @@
 
 local specialFunctionId = 30 -- This special function will be reserved: 1 for SF1, 2 for SF2…
 
--- You NEED to use logical switches to manipulate TaraniTunes.
+--[[
+!!You NEED to use logical switches to manipulate TaraniTunes!!
 
--- WARNING: If you use trims for changing songs for example (and I recommand you do),
--- you need to deactivate the "real" trim functions of the model, to do this,
--- go into "FLIGHT MODES" configuration, go to each flight mode you use for your model
--- and set the throttle "Trims" value (the third if you use the default AETR mode) to "--".
+LS60 will list the song length of the currently playing song 
+(this is automatically updated you do not have to enter the values)
 
--- Here's how to setup the play switch to SD centered:
--- LOGICAL SWITCH  L61
--- Func   OR
--- V1     SD-
--- V2     SD-
--- Then set playSongLogicalSwitch to 61 below.
+ WARNING: If you use trims for changing songs for example (and I recommand you do),
+ you need to deactivate the "real" trim functions of the model, to do this,
+ go into "FLIGHT MODES" configuration, go to each flight mode you use for your model
+ and set the throttle "Trims" value (the third if you use the default AETR mode) to "--".
 
--- Here's how to setup the next song switch to throttle trim down:
--- LOGICAL SWITCH  L62
--- Func   OR
--- V1     tTd
--- V2     tTd
--- Then set nextSongLogicalSwitch to 62 below.
+
+ For the song to advance after the timer
+ you need to set a special function to Reset Timer 3 then LS60 is activated
+ EXAMPLE: SF31 RESET Timer3 [x]  
+ 
+ Here's how to setup the play switch to SD centered:
+ LOGICAL SWITCH  L61
+ Func   OR
+ V1     SD-
+ V2     SD-
+ Then set playSongLogicalSwitch to 61 below.
+
+ Here's how to setup the next song switch to throttle trim down:
+ LOGICAL SWITCH  L62
+ Func   OR
+ V1     tTd
+ V2     tTd
+ Then set nextSongLogicalSwitch to 62 below.
+--]]
 
 local playSongLogicalSwitch   = 61 -- Logical switch that will play the current song
 local nextSongLogicalSwitch   = 62 -- Logical switch that will set the current song to the next one
 local prevSongLogicalSwitch   = 63 -- Logical switch that will set the current song to the previous one
 local randomSongLogicalSwitch = 64 -- Logical switch that will set the current song to a random one
+
 
 -- DON'T EDIT BELOW THIS LINE --
 
@@ -71,7 +82,7 @@ function resetSong()
 		}
 	)
 end
-
+	
 local function init()
 	-- Calculate indexes
 	specialFunctionId  = specialFunctionId - 1 -- SF1 is at index 0 and so on
@@ -94,9 +105,8 @@ prevSongSwitchPressed   = false;
 randomSongSwitchPressed = false;
 
 local function background()
+model.setLogicalSwitch(59,{func=6,v1=230,v2=playlist[playingSong][3]}) --updates the logical swicth according to the current song selected
 
-	model.setLogicalSwitch(59,{func=6,v1=230,v2=playlist[playingSong][3]}) --updates the logical swicth according to the current song selected
-	
 	if resetDone then
 		playSong()
 		resetDone = false
@@ -107,7 +117,22 @@ local function background()
 		songChanged = false
 		resetDone = true
 	end
-
+	
+-- Song Over
+	if model.getTimer(2).value > playlist[playingSong][3] then --Compare the timer to the song length
+			nextSongSwitchPressed = true			 --taken from next song above
+			nextScreenUpdate = true					 --taken from next song above
+			songChanged = true						 --taken from next song above
+			screenUpdate = true 					 --taken from next song above
+			if playingSong == #playlist then		 --taken from next song above
+				playingSong = 1						 --taken from next song above
+			else									 --taken from next song above
+				playingSong = playingSong + 1		 --taken from next song above
+			end										 --taken from next song above
+			else									 --taken from next song above
+		nextSongSwitchPressed = false				 --taken from next song above
+		end											 -- end if comparison
+	
 	-- Next song
 	if getValue(nextSongSwitchId) > 0 then
 		if not nextSongSwitchPressed then
@@ -154,22 +179,10 @@ local function background()
 	else
 		randomSongSwitchPressed = false
 	end
-	-- Song Over
-		if model.getTimer(2).value > playlist[playingSong][3] then
-			nextSongSwitchPressed = true
-			nextScreenUpdate = true
-			songChanged = true
-			screenUpdate = true
-			if playingSong == #playlist then
-				playingSong = 1
-			else
-				playingSong = playingSong + 1
-			end
-			else
-		nextSongSwitchPressed = false
-	end
+end
 
 local function run(event)
+
 	-- INPUT HANDLING --
 	if (event == EVT_ROT_RIGHT or event == EVT_MINUS_FIRST or event == EVT_MINUS_RPT) then
 		if selection == #playlist then
@@ -195,7 +208,6 @@ local function run(event)
 		selection = playingSong
 		nextScreenUpdate = false
 	end
-end
 
 	-- DRAWING --
 	if screenUpdate or event == 191 then -- 191 is the event code when entering the telemetry screen
