@@ -154,7 +154,20 @@ local function background()
 	else
 		randomSongSwitchPressed = false
 	end
-end
+	-- Song Over
+		if model.getTimer(2).value > playlist[playingSong][3] then
+			nextSongSwitchPressed = true
+			nextScreenUpdate = true
+			songChanged = true
+			screenUpdate = true
+			if playingSong == #playlist then
+				playingSong = 1
+			else
+				playingSong = playingSong + 1
+			end
+			else
+		nextSongSwitchPressed = false
+	end
 
 local function run(event)
 	-- INPUT HANDLING --
@@ -182,6 +195,7 @@ local function run(event)
 		selection = playingSong
 		nextScreenUpdate = false
 	end
+end
 
 	-- DRAWING --
 	if screenUpdate or event == 191 then -- 191 is the event code when entering the telemetry screen
