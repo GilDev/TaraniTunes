@@ -94,6 +94,9 @@ prevSongSwitchPressed   = false;
 randomSongSwitchPressed = false;
 
 local function background()
+
+	model.setLogicalSwitch(59,{func=6,v1=230,v2=playlist[playingSong][3]}) --updates the logical swicth according to the current song selected
+	
 	if resetDone then
 		playSong()
 		resetDone = false
