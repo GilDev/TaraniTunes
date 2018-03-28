@@ -27,7 +27,7 @@ The “[Example](Example)” folder contains an exemple of the Taranis' SD card 
 
 1. On your computer:
 	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences if needed then put `iTunes.lua` in `/SCRIPT/TELEMETRY`.
-	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.txt) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME"},` where `SONG_FILENAME` must be 6 characters or less. Look at “[Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt)” for an example of formatting.
+	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.txt) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME",length},` where `SONG_FILENAME` must be 6 characters or less. Look at “[Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt)” for an example of formatting. Length is a numeric number of seconds your song is "EXAMPLE - song is 3:45 long you would enter 225.  for a 4:52 song enter 292.
 	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great.
 
 2. On your Taranis (I'm going to explain how I setup my radio):
@@ -72,7 +72,7 @@ Le dossier « [Example](Example) » contient un exemple de la structure de l
 1. Sur votre ordinateur :
 
 1. Éditer [`iTunes.lua`](iTunes.lua) selon vos préférences, si nécessaire, et mettre ensuite `iTunes.lua` dans le dossier `/SCRIPT/TELEMETRY` ».
-2. Créer un fichier [`playlist.lua`](Example/SOUNDS/playlist.txt) dans `/SOUNDS` dans lequel chaque ligne doit suivre le format suivant : `{"Nom du morceau", "NOM_DU_FICHIER"},` où `NOM_DU_FICHIER` doit faire 6 caractères maximum. Regardez « [Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt) » pour un exemple de fichier correctement formaté.
+2. Créer un fichier [`playlist.lua`](Example/SOUNDS/playlist.txt) dans `/SOUNDS` dans lequel chaque ligne doit suivre le format suivant : `{"Nom du morceau", "NOM_DU_FICHIER",longueur},` où `NOM_DU_FICHIER` doit faire 6 caractères maximum. Regardez « [Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt) » pour un exemple de fichier correctement formaté.  La longueur est un nombre numérique de secondes votre chanson est "EXEMPLE - la chanson est 3:45 longtemps vous entreriez 225. pour une chanson de 4:52 entrez 292.
 3. Mettre les morceaux correspondants `NOM_DU_FICHIER.wav` dans `/SOUNDS/fr` si votre radio est en français (sinon remplacez `fr` par votre langue, le dossier dans lequel vous placez vos autres sons). Ceux-ci doivent être converti en mono, préférablement normalisés, et encodés au format WAV Microsoft 16-bits non signé PCM à une fréquence d'échantillonnage de 32 kHz, comme les autres sons que vous utilisez. Vous pouvez utiliser [Audacity](http://www.audacityteam.org) pour faire ça, ça marche bien.
 
 2. Sur votre Taranis (je vais expliquer comment je règle ma radio, avec le fichier « iTunes.lua » non modifié) :
