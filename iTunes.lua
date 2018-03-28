@@ -119,7 +119,7 @@ model.setLogicalSwitch(59,{func=6,v1=230,v2=playlist[playingSong][3]}) --updates
 	end
 	
 -- Song Over
-	if model.getTimer(2).value > playlist[playingSong][3] then --Compare the timer to the song length
+	if model.getTimer(2).value >= playlist[playingSong][3] then --Compare the timer to the song length
 			nextSongSwitchPressed = true			 --taken from next song above
 			nextScreenUpdate = true					 --taken from next song above
 			songChanged = true						 --taken from next song above
