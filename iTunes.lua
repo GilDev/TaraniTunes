@@ -42,8 +42,8 @@ local randomSongLogicalSwitch = 64 -- Logical switch that will set the current s
 --[[
 Using the Example above 
 SD- will Play the music 
-SD↑ would play a random song and 
-SD↓ would stop the song 
+SD↑ would stop the song and 
+SD↓ would play a random song 
 
 Enter the Switch you will you be using to turn off the song and also play a random song BELOW
 these will be assigned to SF31 and SF32These functions will be automatically added once the 
@@ -57,8 +57,8 @@ SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22
 
 --]]
 
-local random =10
-local stop =12
+local random =12
+local stop =10
 
 -- DON'T EDIT BELOW THIS LINE --
 
