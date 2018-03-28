@@ -42,8 +42,8 @@ local randomSongLogicalSwitch = 64 -- Logical switch that will set the current s
 --[[
 Using the Example above 
 SD- will Play the music 
-SD↑ would stop the song and 
-SD↓ would play a random song 
+SD↑ would play a random song and 
+SD↓ would stop the song 
 
 Enter the Switch you will you be using to turn off the song and also play a random song BELOW
 these will be assigned to SF31 and SF32These functions will be automatically added once the 
@@ -57,8 +57,8 @@ SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22
 
 --]]
 
-local random =12
-local stop =10
+local random =4
+local stop =6
 
 -- DON'T EDIT BELOW THIS LINE --
 
@@ -71,14 +71,14 @@ local playingSong = 1
 local selection = 1
 
 --Generate SongLength on LS60
-function playTime() --Autoupdates the logical swicth according to the current song selected
-	model.setLogicalSwitch
-		(59,{
-		func=3,
-		v1=230,
-		v2=playlist[playingSong][3]
-		})
-end
+--function playTime() --Autoupdates the logical swicth according to the current song selected
+--	model.setLogicalSwitch
+--		(59,{
+--		func=3,
+--		v1=230,
+--		v2=playlist[playingSong][3]
+--		})
+--end
 
 local songChanged = false
 local resetDone = false
@@ -131,6 +131,8 @@ prevSongSwitchPressed   = false;
 randomSongSwitchPressed = false;
 
 local function background()
+--Autoupdates the logical swicth according to the current song selected
+model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
 
 	if resetDone then
 		playSong()
