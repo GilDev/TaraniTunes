@@ -9,19 +9,15 @@ local specialFunctionId = 30 -- This special function will be reserved: 1 for SF
 
 --[[
 !!You NEED to use logical switches to manipulate TaraniTunes!!
+!!For the song to advance a special function to Reset Timer 3 has been placed on SF31 and 32!!
 
 LS60 will list the song length of the currently playing song 
-(this is automatically updated you do not have to enter the values)
+This is automatically update. You do not have to enter the values
 
- WARNING: If you use trims for changing songs for example (and I recommand you do),
+ WARNING: If you use trims for changing songs for example (AND I RECOMMAND YOU DO),
  you need to deactivate the "real" trim functions of the model, to do this,
  go into "FLIGHT MODES" configuration, go to each flight mode you use for your model
  and set the throttle "Trims" value (the third if you use the default AETR mode) to "--".
-
-
- For the song to advance after the timer
- you need to set a special function to Reset Timer 3 then LS60 is activated
- EXAMPLE: SF31 RESET Timer3 [x]  
  
  Here's how to setup the play switch to SD centered:
  LOGICAL SWITCH  L61
@@ -43,6 +39,26 @@ local nextSongLogicalSwitch   = 62 -- Logical switch that will set the current s
 local prevSongLogicalSwitch   = 63 -- Logical switch that will set the current song to the previous one
 local randomSongLogicalSwitch = 64 -- Logical switch that will set the current song to a random one
 
+--[[
+Using the Example above 
+SD- will Play the music 
+SD↑ would play a random song and 
+SD↓ would stop the song 
+
+Enter the Switch you will you be using to turn off the song and also play a random song BELOW
+these will be assigned to SF31 and SF32These functions will be automatically added once the 
+switch is activated the 1st time
+
+Here are the numbers for the swicthes replace the value in random and stop with the appropriate number
+
+SA↑=1, SA-=2, SA↓=3, SB↑=4, SB-=5, SB↓=6, SC↑=7, SC-=8, SC↓=9, 
+SD↑=10, SD-=11, SD↓=12, SE↑=13, SE-=14, SE↓=15, SF↑=16, SF↓=17, 
+SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22
+
+--]]
+
+local random =10
+local stop =12
 
 -- DON'T EDIT BELOW THIS LINE --
 
@@ -51,9 +67,18 @@ loadScript("/SOUNDS/playlist.lua")() -- Import playlist
 local errorOccured = false
 local screenUpdate = true
 local nextScreenUpdate = false
-
 local playingSong = 1
 local selection = 1
+
+--Generate SongLength on LS60
+function playTime() --Autoupdates the logical swicth according to the current song selected
+	model.setLogicalSwitch
+		(59,{
+		func=3,
+		v1=230,
+		v2=playlist[playingSong][3]
+		})
+end
 
 local songChanged = false
 local resetDone = false
@@ -82,7 +107,7 @@ function resetSong()
 		}
 	)
 end
-	
+		
 local function init()
 	-- Calculate indexes
 	specialFunctionId  = specialFunctionId - 1 -- SF1 is at index 0 and so on
@@ -98,6 +123,7 @@ local function init()
 	nextScreenUpdate = true
 	screenUpdate = true
 	songChanged = true
+
 end
 
 nextSongSwitchPressed   = false;
@@ -105,13 +131,15 @@ prevSongSwitchPressed   = false;
 randomSongSwitchPressed = false;
 
 local function background()
-model.setLogicalSwitch(59,{func=6,v1=230,v2=playlist[playingSong][3]}) --updates the logical swicth according to the current song selected
 
 	if resetDone then
 		playSong()
 		resetDone = false
 	end
 	
+-- reset timer for current song
+model.setCustomFunction(30,{switch=stop,func=3,value=2,active=1})	
+
 	if songChanged then
 		resetSong()
 		songChanged = false
@@ -120,20 +148,21 @@ model.setLogicalSwitch(59,{func=6,v1=230,v2=playlist[playingSong][3]}) --updates
 	
 -- Song Over
 	if model.getTimer(2).value >= playlist[playingSong][3] then --Compare the timer to the song length
-			if not nextSongSwitchPressed then
-			nextSongSwitchPressed = true			 --taken from next song above
-			nextScreenUpdate = true					 --taken from next song above
-			songChanged = true						 --taken from next song above
-			screenUpdate = true 					 --taken from next song above
-			if playingSong == #playlist then		 --taken from next song above
-				playingSong = 1						 --taken from next song above
-			else									 --taken from next song above
-				playingSong = playingSong + 1		 --taken from next song above
-			end										 --taken from next song above
-			else									 --taken from next song above
-		nextSongSwitchPressed = false				 --taken from next song above
-		end		
-		end									 -- end if comparison
+		if not nextSongSwitchPressed then			-- not added back to the vaviable
+			model.setTimer(2,{value=0})				--Resets timer to 0
+			nextSongSwitchPressed = true
+			nextScreenUpdate = true	
+			songChanged = true
+			screenUpdate = true
+			if playingSong == #playlist then
+				playingSong = 1
+			else
+				playingSong = playingSong + 1
+			end
+			else 
+		nextSongSwitchPressed = false
+		end	
+	end	
 	
 	-- Next song
 	if getValue(nextSongSwitchId) > 0 then
@@ -144,8 +173,10 @@ model.setLogicalSwitch(59,{func=6,v1=230,v2=playlist[playingSong][3]}) --updates
 			screenUpdate = true
 			if playingSong == #playlist then
 				playingSong = 1
+				model.setTimer(2,{value=0})				--Resets timer to 0
 			else
 				playingSong = playingSong + 1
+				model.setTimer(2,{value=0})				--Resets timer to 0
 			end
 		end
 	else
@@ -155,6 +186,7 @@ model.setLogicalSwitch(59,{func=6,v1=230,v2=playlist[playingSong][3]}) --updates
 	-- Previous song
 	if getValue(prevSongSwitchId) > 0 then
 		if not prevSongSwitchPressed then
+			model.setTimer(2,{value=0})				--Resets timer to 0
 			prevSongSwitchPressed = true
 			nextScreenUpdate = true
 			songChanged = true
@@ -177,10 +209,12 @@ model.setLogicalSwitch(59,{func=6,v1=230,v2=playlist[playingSong][3]}) --updates
 			songChanged = true
 			screenUpdate = true
 			nextScreenUpdate = true
-		end
+			model.setCustomFunction(31,{switch=random,func=3,value=2,active=1})--had to add another SF since the 
+		end																	   --switch can be held in position
 	else
 		randomSongSwitchPressed = false
 	end
+
 end
 
 local function run(event)
@@ -206,10 +240,11 @@ local function run(event)
 		playingSong = selection
 		songChanged = true
 		screenUpdate = true
+	
 	elseif nextScreenUpdate then
 		selection = playingSong
 		nextScreenUpdate = false
-	end
+		end
 
 	-- DRAWING --
 	if screenUpdate or event == 191 then -- 191 is the event code when entering the telemetry screen
