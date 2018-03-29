@@ -233,8 +233,10 @@ local function run(event)
 
 		lcd.clear();
 		
-local long=playlist[playingSong][3]
-local upTime=model.getTimer(2).value
+		-- Calculate indexes for screen display
+	if LCD_W == 212 then -- if Taranis X9D	
+		local long=playlist[playingSong][3]
+		local upTime=model.getTimer(2).value
 		
 		-- Title
 		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
@@ -245,7 +247,12 @@ local upTime=model.getTimer(2).value
 		lcd.drawTimer(144, 9, long, SMLSIZE)
 		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
 		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
-
+			
+	else -- if Taranis Q X7
+		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
+		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
+		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
+	end
 		-- Separator
 		lcd.drawLine(0, 16, LCD_W - 1, 16, SOLID, FORCE)
 
