@@ -257,9 +257,17 @@ local function run(event)
 
 		-- Separator
 		lcd.drawLine(0, 26, LCD_W - 1, 26, DOTTED, FORCE)
-
+		
+local long=playlist[playingSong][3]
+local upTime=model.getTimer(2).value
+		
 		-- Song selector
 		if playlist[selection - 2] then lcd.drawText(1, 28, playlist[selection - 2][1], SMLSIZE) end
+		lcd.drawText(106, 1, "Played", SMLSIZE) end
+		lcd.drawTimer(110, 9, upTime, SMLSIZE) end
+		lcd.drawText(139, 1, string.char(62),SMLSIZE) end
+		lcd.drawText(145, 1, "Song", SMLSIZE) end
+		lcd.drawTimer(144, 9, long, SMLSIZE) end
 		if playlist[selection - 1] then lcd.drawText(3, 35, playlist[selection - 1][1], SMLSIZE) end
 		if playlist[selection]     then lcd.drawText(1, 42, string.char(126) .. playlist[selection][1], SMLSIZE) end
 		if playlist[selection + 1] then lcd.drawText(3, 49, playlist[selection + 1][1], SMLSIZE) end
