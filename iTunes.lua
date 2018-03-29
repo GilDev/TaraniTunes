@@ -42,8 +42,8 @@ local randomSongLogicalSwitch = 64 -- Logical switch that will set the current s
 --[[
 Using the Example above 
 SD- will Play the music 
-SD↑ would play a random song and 
-SD↓ would stop the song 
+SD↑ would stop the song and 
+SD↓ would play a random song 
 
 Enter the Switch you will you be using to turn off the song and also play a random song BELOW
 these will be assigned to SF31 and SF32These functions will be automatically added once the 
@@ -57,8 +57,8 @@ SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22
 
 --]]
 
-local random =4
-local stop =6
+local random =12
+local stop =10
 
 -- DON'T EDIT BELOW THIS LINE --
 
@@ -69,17 +69,6 @@ local screenUpdate = true
 local nextScreenUpdate = false
 local playingSong = 1
 local selection = 1
-
---Generate SongLength on LS60
---function playTime() --Autoupdates the logical swicth according to the current song selected
---	model.setLogicalSwitch
---		(59,{
---		func=3,
---		v1=230,
---		v2=playlist[playingSong][3]
---		})
---end
-
 local songChanged = false
 local resetDone = false
 
@@ -89,23 +78,12 @@ local function error(strings)
 end
 
 function playSong()
-	model.setCustomFunction(
-		specialFunctionId,
-		{
-			switch = playSongSwitchId,
-			func = 16,
-			name = playlist[playingSong][2]
-		}
-	)
+	model.setCustomFunction(specialFunctionId,{switch = playSongSwitchId,func = 16,
+			name = playlist[playingSong][2]})
 end
 
 function resetSong()
-	model.setCustomFunction(
-		specialFunctionId,
-		{
-			switch = -playSongSwitchId
-		}
-	)
+	model.setCustomFunction(specialFunctionId,{switch = -playSongSwitchId})
 end
 		
 local function init()
@@ -116,6 +94,7 @@ local function init()
 	else -- if Taranis Q X7
 		playSongSwitchId = 38 + playSongLogicalSwitch
 	end
+	
 	nextSongSwitchId   = getFieldInfo("ls" .. nextSongLogicalSwitch).id
 	prevSongSwitchId   = getFieldInfo("ls" .. prevSongLogicalSwitch).id
 	randomSongSwitchId = getFieldInfo("ls" .. randomSongLogicalSwitch).id
@@ -123,7 +102,6 @@ local function init()
 	nextScreenUpdate = true
 	screenUpdate = true
 	songChanged = true
-
 end
 
 nextSongSwitchPressed   = false;
@@ -131,6 +109,7 @@ prevSongSwitchPressed   = false;
 randomSongSwitchPressed = false;
 
 local function background()
+
 --Autoupdates the logical swicth according to the current song selected
 model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
 
@@ -211,8 +190,8 @@ model.setCustomFunction(30,{switch=stop,func=3,value=2,active=1})
 			songChanged = true
 			screenUpdate = true
 			nextScreenUpdate = true
-			model.setCustomFunction(31,{switch=random,func=3,value=2,active=1})--had to add another SF since the 
-		end																	   --switch can be held in position
+			model.setCustomFunction(31,{switch=random,func=3,value=2,active=1})
+		end																	   
 	else
 		randomSongSwitchPressed = false
 	end
@@ -247,15 +226,23 @@ local function run(event)
 		selection = playingSong
 		nextScreenUpdate = false
 		end
-
+		
 	-- DRAWING --
 	if screenUpdate or event == 191 then -- 191 is the event code when entering the telemetry screen
-		screenUpdate = false
+		screenUpdate = true
 
 		lcd.clear();
-
+		
+local long=playlist[playingSong][3]
+local upTime=model.getTimer(2).value
+		
 		-- Title
 		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
+		lcd.drawText(106, 1, "Played", SMLSIZE)
+		lcd.drawTimer(110, 9, upTime, SMLSIZE)
+		lcd.drawText(139, 1, string.char(62),SMLSIZE)
+		lcd.drawText(145, 1, "Song", SMLSIZE)
+		lcd.drawTimer(144, 9, long, SMLSIZE)
 		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
 		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
 
@@ -277,14 +264,14 @@ local function run(event)
 
 		-- Separator
 		lcd.drawLine(0, 26, LCD_W - 1, 26, DOTTED, FORCE)
-
+				
 		-- Song selector
 		if playlist[selection - 2] then lcd.drawText(1, 28, playlist[selection - 2][1], SMLSIZE) end
 		if playlist[selection - 1] then lcd.drawText(3, 35, playlist[selection - 1][1], SMLSIZE) end
 		if playlist[selection]     then lcd.drawText(1, 42, string.char(126) .. playlist[selection][1], SMLSIZE) end
 		if playlist[selection + 1] then lcd.drawText(3, 49, playlist[selection + 1][1], SMLSIZE) end
 		if playlist[selection + 2] then lcd.drawText(1, 56, playlist[selection + 2][1], SMLSIZE) end
+	
 	end
-end
-
+	end
 return {run = run, background = background, init = init}
