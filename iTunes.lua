@@ -69,7 +69,6 @@ local screenUpdate = true
 local nextScreenUpdate = false
 local playingSong = 1
 local selection = 1
-
 local songChanged = false
 local resetDone = false
 
@@ -95,6 +94,7 @@ local function init()
 	else -- if Taranis Q X7
 		playSongSwitchId = 38 + playSongLogicalSwitch
 	end
+	
 	nextSongSwitchId   = getFieldInfo("ls" .. nextSongLogicalSwitch).id
 	prevSongSwitchId   = getFieldInfo("ls" .. prevSongLogicalSwitch).id
 	randomSongSwitchId = getFieldInfo("ls" .. randomSongLogicalSwitch).id
@@ -232,10 +232,17 @@ local function run(event)
 		screenUpdate = true
 
 		lcd.clear();
-
+		
+local long=playlist[playingSong][3]
+local upTime=model.getTimer(2).value
+		
 		-- Title
 		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
-		lcd.drawTimer(15, 7 model.getTimer(2).value, SMLSIZE)
+		lcd.drawText(106, 1, "Played", SMLSIZE)
+		lcd.drawTimer(110, 9, upTime, SMLSIZE)
+		lcd.drawText(139, 1, string.char(62),SMLSIZE)
+		lcd.drawText(145, 1, "Song", SMLSIZE)
+		lcd.drawTimer(144, 9, long, SMLSIZE)
 		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
 		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
 
@@ -257,17 +264,9 @@ local function run(event)
 
 		-- Separator
 		lcd.drawLine(0, 26, LCD_W - 1, 26, DOTTED, FORCE)
-		
-local long=playlist[playingSong][3]
-local upTime=model.getTimer(2).value
-		
+				
 		-- Song selector
 		if playlist[selection - 2] then lcd.drawText(1, 28, playlist[selection - 2][1], SMLSIZE) end
-		lcd.drawText(106, 1, "Played", SMLSIZE) end
-		lcd.drawTimer(110, 9, upTime, SMLSIZE) end
-		lcd.drawText(139, 1, string.char(62),SMLSIZE) end
-		lcd.drawText(145, 1, "Song", SMLSIZE) end
-		lcd.drawTimer(144, 9, long, SMLSIZE) end
 		if playlist[selection - 1] then lcd.drawText(3, 35, playlist[selection - 1][1], SMLSIZE) end
 		if playlist[selection]     then lcd.drawText(1, 42, string.char(126) .. playlist[selection][1], SMLSIZE) end
 		if playlist[selection + 1] then lcd.drawText(3, 49, playlist[selection + 1][1], SMLSIZE) end
