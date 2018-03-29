@@ -229,12 +229,13 @@ local function run(event)
 		
 	-- DRAWING --
 	if screenUpdate or event == 191 then -- 191 is the event code when entering the telemetry screen
-		screenUpdate = false
+		screenUpdate = true
 
 		lcd.clear();
 
 		-- Title
 		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
+		lcd.drawTimer(15, 7 model.getTimer(2).value, SMLSIZE)
 		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
 		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
 
