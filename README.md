@@ -1,4 +1,4 @@
-TaraniTunes
+TaraniTunes v.2.01
 ===========
 
 *Awesome music player for FrSky Taranis radios.*
@@ -18,25 +18,27 @@ Here's a video explaining everything, from the installation to the usage:
 
 [![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
 
-The installation process changed a bit, principaly the `playlist.txt` syntax. Please refer to the following instructions.
-
+The installation process changed a bit, principaly the `playlist.txt` syntax. 
+There are also changes to the Logical Switches and activating Timer3 to use to automatically play the next song without user input "KEEPING YOUR ATTENTION ON THE STICKS WHERE THEY BELONG"!
+Please refer to the following instructions.
 
 ### Installation
 
-The “[Example](Example)” folder contains an exemple of the Taranis' SD card structure you must follow. It works, you can, if you want, merge it with your Taranis' current SD card content. You currently need to have at least 5 songs for the script to work.
+The “[Example](Example)” folder contains an example of the Taranis' SD card structure you must follow. It works, you can, if you want, merge it with your Taranis' current SD card content. You currently need to have at least 5 songs for the script to work.
 
 1. On your computer:
-	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences if needed then put `iTunes.lua` in `/SCRIPT/TELEMETRY`.
-	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.txt) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME",length},` where `SONG_FILENAME` must be 6 characters or less. Look at “[Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt)” for an example of formatting.  Length is a numeric number of seconds your song is "EXAMPLE - song is 3:45 long you would enter 225.  for a 4:52 song enter 292.
-	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great.
-	4. Turn On Timer3 using the trigger of your choice.  (I use the same trigger as my other timers that way everything stops when I flip 1 switch). Set it count up and silence any countdowns/minute calls for this timer.
+	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences (if needed) then put `iTunes.lua` in `/SCRIPT/TELEMETRY`.
+	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.txt) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME",Length},` `Song name` has a resonble amount of room to identify the song name. `SONG_FILENAME` must be 6 characters or less. `Length` is a numeric number of seconds your song is "EXAMPLE - Your song is 3:45 long you would enter 225.  for a 4:52 song enter 292.  Multiply the minutes by 60 and add the remainging seconds to determine the seconds of your song. Song length can usually be found in the file properties. Look at “[Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt)” for an example of formatting.  
+	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great. Remeber the filename must be 6 characters or less or it will not play. 
+	4. Activate Timer3 using the trigger you use to Play the song.  Set it count up and silence any countdowns/minute calls for this timer. You may have to come back to this step after you finalize the settings in your radio to ensure the correct trigger is assigned.
 
 2. On your Taranis (I'm going to explain how I setup my radio):
 	1. Set “DISPLAY” model's setting screen as follow:  
 	![Display settings](Screenshots/DisplaySettings.png)
-	2. Set “LOGICAL SWITCHES” model's setting screen as follow:  
+	2. Set “LOGICAL SWITCHES” model's setting screen as follows:  
 	![Logical switches settings](Screenshots/LogicalSwitchesSettings.png)
-	3. Set “FLIGHT MODES” model's setting screen as follow:  
+	3. Set "timer3 setting as follows
+	4. Set “FLIGHT MODES” model's setting screen as follows:
 	![Flight modes settings](Screenshots/FlightModesSettings.png)  
 	In fact, put every throttle trims to “`--`” for every flight mode you use.
 
@@ -52,9 +54,10 @@ From the main screen, hold “Page” to access TaraniTunes. If everything has b
 
 1. Use the rotary encoder (Q X7) or the “+”/“-” buttons to sweep through songs.
 2. Press “Enter” to choose a song to play.
-3. Put the “SD” switch in the middle position to start playing. Put it back in the up position to stop.
+3. Put the “SD” switch in the middle position to start playing. Put it back in the up position to stop/pause the song.
 4. Put “SD” in the down position to select a random song from your playlist.
 5. You can press throttle trims down and up to play next and previous song respectively.
+6. The next song will automatically and Timer3 will reset to 0 it wall also reset if you change songs.
 
 French instructions
 -------------------
