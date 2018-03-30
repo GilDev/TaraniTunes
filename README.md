@@ -14,15 +14,14 @@ You need at least [OpenTX](http://www.open-tx.org) 2.2.
 English instructions
 --------------------
 
-Here's a video explaining everything, from the installation to the usage:
+Here's a video explaining everything, from the installation to the usage.    
+It has not been updated for this version but still helpful:
 
 [![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
 
-The installation process changed a bit, principaly the `playlist.txt` syntax. 
-There are also changes to the Logical Switches and activating Timer3 to use to automatically play the next song without user input.
-
-"KEEPING YOUR HANDS ON THE STICKS WHERE THEY BELONG"!
-
+The installation process changed a bit, principaly the `playlist.txt` syntax, the `Logical Switches` and `Timer3`.    
+These changes automatically play the next song without user input allowing you too:     
+"KEEP YOUR HANDS ON THE STICKS WHERE THEY BELONG!" while listening to music.    
 Please refer to the following instructions.
 
 ### Installation
@@ -31,23 +30,22 @@ The “[Example](Example)” folder contains an example of the Taranis' SD card 
 
 1. On your computer:
 	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences (if needed) then put `iTunes.lua` in `/SCRIPT/TELEMETRY`.
-	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.lua) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME",Length},` `Song name` has a resonble amount of room to identify the song name. `SONG_FILENAME` must be 6 characters or less. `Length` is a numeric number of seconds your song is "EXAMPLE - Your song is 3:45 long you would enter 225.  for a 4:52 song enter 292.  Multiply the minutes by 60 and add the remainging seconds to determine the seconds of your song. Song length can usually be found in the file properties. Look at “[Example/SOUNDS/playlist.lua](Example/SOUNDS/playlist.lua)” for an example of formatting.  
-	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great. Remeber the filename must be 6 characters or less or it will not play. 
-	4. Activate "Timer3" using the trigger you use to Play the song.  Set it count up and silence any countdowns/minute calls for this timer. You may have to come back to this step after you finalize the settings in your radio to ensure the correct trigger is assigned.
+	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.lua) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME",Length},` `Song name` has a reasonble amount of room to identify the song name. `SONG_FILENAME` must be 6 characters or less. `Length` is a numeric number of seconds your song is: "EXAMPLE - Your song is 3:45 long you would enter 225.  For a 4:52 song enter 292.  Simply multiply the minutes by 60 and add the remainging seconds to determine the seconds of your song. Song length can usually be found in the file properties. Look at “[Example/SOUNDS/playlist.lua](Example/SOUNDS/playlist.lua)” for an example of formatting.  
+	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the same folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great. Remember the filename must be 6 characters or less or it will not play. 
+	4. Activate "Timer3" using the trigger you set to `Play` the song.  Set it to count up and silence any minute calls for this timer. You may have to come back to this step after you finalize the settings in your radio to ensure the correct trigger is assigned.
 
 2. On your Taranis (I'm going to explain how I setup my radio):
 	1. Set “DISPLAY” model's setting screen as follow:  
 	![Display settings](Screenshots/DisplaySettings.png)
 	2. Set “LOGICAL SWITCHES” model's setting screen as follows:  
 	![Logical switch settings](Screenshots/LogicalSwitchSettings.PNG) 
-	3. Set "TIMER3" settings as follows:
-	![Timer settings](Screenshots/TaraniTunesTimer.PNG)   
-	4. Set “FLIGHT MODES” model's setting screen as follows:    
+	3. Set “FLIGHT MODES” model's setting screen as follows:     
 	![Flight modes settings](Screenshots/FlightModesSettings.png)  
 	In fact, put every throttle trims to “`--`” for every flight mode you use.
+	4. Set "TIMER3" settings as follows:      
+	![Timer settings](Screenshots/TaraniTunesTimer.PNG)   
 
 There you go! Next section will explain you how to use TaraniTunes.
-
 
 ### Usage
 
@@ -72,7 +70,6 @@ Voici une vidéo en Anglais qui explique tout, de l'installation à l'utilisatio
 [![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
 
 Le processus d'installation a légèrement changé, notamment la syntaxe du fichier `playlist.txt`. Veuillez vous référer aux instructions suivantes.
-
 
 ### Installation
 
@@ -113,7 +110,7 @@ Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes
 
 Todo
 ----
-Automate playlist.lua creation - No Idea how to do this (at the moment)
+Automate playlist.lua creation - No idea how to do this (at the moment)
 
 Suggestions for OpenTX's API
 ----------------------------
