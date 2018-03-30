@@ -9,7 +9,7 @@ You need at least [OpenTX](http://www.open-tx.org) 2.2.
 * Taranis Q X7  
   ![Taranis Q X7](Screenshots/TaraniTunesQX7.png)
 * Taranis X9D  
-  ![Taranis X9D](Screenshots/TaraniTunesX9D.png)
+  ![Taranis X9D](Screenshots/TaraniTunesX9D.PNG)
 
 English instructions
 --------------------
@@ -36,8 +36,9 @@ The “[Example](Example)” folder contains an example of the Taranis' SD card 
 	1. Set “DISPLAY” model's setting screen as follow:  
 	![Display settings](Screenshots/DisplaySettings.png)
 	2. Set “LOGICAL SWITCHES” model's setting screen as follows:  
-	![Logical switches settings](Screenshots/LogicalSwitchesSettings.png)
-	3. Set "timer3 setting as follows
+	![Logical switches settings](Screenshots/LogicalSwitchesSettings.PNG)
+	3. Set "Timer3" settings as follows:
+	![Timer settings](Screenshots/TaraniTunesTimer.PNG)
 	4. Set “FLIGHT MODES” model's setting screen as follows:
 	![Flight modes settings](Screenshots/FlightModesSettings.png)  
 	In fact, put every throttle trims to “`--`” for every flight mode you use.
@@ -57,7 +58,8 @@ From the main screen, hold “Page” to access TaraniTunes. If everything has b
 3. Put the “SD” switch in the middle position to start playing. Put it back in the up position to stop/pause the song.
 4. Put “SD” in the down position to select a random song from your playlist.
 5. You can press throttle trims down and up to play next and previous song respectively.
-6. The next song will automatically and Timer3 will reset to 0 it wall also reset if you change songs.
+6. The next song will automatically play and Timer3 will reset to 0 
+7. The Timer will also reset if you change songs.
 
 French instructions
 -------------------
