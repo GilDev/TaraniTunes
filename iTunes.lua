@@ -1,66 +1,65 @@
--- TaraniTunes
--- http://github.com/GilDev/TaraniTunes
--- By GilDev
--- http://gildev.tk
+--[[ 
+ TaraniTunes
+ Verion 2.01
+ http://github.com/GilDev/TaraniTunes
+ By GilDev
+ http://gildev.tk
 
--- CONFIG --
+See the README file for setting up the playlist.lua file
 
-local specialFunctionId = 30 -- This special function will be reserved: 1 for SF1, 2 for SF2…
-
---[[
+----Setting up the Transmitter----	
+							
 !!You NEED to use logical switches to manipulate TaraniTunes!!
-!!For the song to advance a special function to Reset Timer 3 has been placed on SF31 and 32!!
+
+ WARNING: If you use trims for changing songs (and I recommend you do),
+ you need to deactivate the "real" trim functions on the trims you plan 
+ to use for manipulating TaraniTunes. 
+ To do this, go into "FLIGHT MODES" configuration, go to each flight mode 
+ you use for your model and set the appropriate "Trims" value to "--"   
+ (Throttle trims are in the example).
+ 
+ Here's a sample setup of the logical switches (LS61 thru LS64) you need to setup on your transmitter
+ 
+  SWITCH  Func  V1	V2
+  LS61 	 OR	SD-	SD↑ (**Explanation under this example)
+  LS62	 OR	tTd	tTd (LS62 plays next song)
+  LS63	 OR	tTu	tTu (LS63 plays previous song)
+  LS64	 OR	SD↓	SD↓ (LS64 plays random song)
+ 
+**Using the Example above 
+SD- will "Play" the music !! Set the trigger for timer3 in your Model Setup to match this value!!
+SD↑ will "Pause" the song and Timer3  
+
+----Additional Functions/Information-----
+Since everything in the OpenTX is user programmable
+You need to enter the switch number to play the random song. 
+This will allow TaraniTunes to assign a reset to the song timer on this switch
+
+Here are the numbers for the switches 
+replace the value in "random"(below) with the appropriate number
+
+SA↑=1, SA-=2, SA↓=3, SB↑=4, SB-=5, SB↓=6, SC↑=7, SC-=8, SC↓=9, 
+SD↑=10, SD-=11, SD↓=12, SE↑=13, SE-=14, SE↓=15, SF↑=16, SF↓=17, 
+SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22       --]]
+
+local random =12 --Enter the switch number you will use for a random song 
+--[[             Reset Timer3 will been placed on SF31 using this information automatically
 
 LS60 will list the song length of the currently playing song 
-This is automatically update. You do not have to enter the values
+This is updated automatically, you do not have to enter the values.
 
- WARNING: If you use trims for changing songs for example (AND I RECOMMAND YOU DO),
- you need to deactivate the "real" trim functions of the model, to do this,
- go into "FLIGHT MODES" configuration, go to each flight mode you use for your model
- and set the throttle "Trims" value (the third if you use the default AETR mode) to "--".
- 
- Here's how to setup the play switch to SD centered:
- LOGICAL SWITCH  L61
- Func   OR
- V1     SD-
- V2     SD-
- Then set playSongLogicalSwitch to 61 below.
-
- Here's how to setup the next song switch to throttle trim down:
- LOGICAL SWITCH  L62
- Func   OR
- V1     tTd
- V2     tTd
- Then set nextSongLogicalSwitch to 62 below.
+BGMusic|| (pause) will be placed on SF32.
+This will be automatically inserted.
+You do not have to enter the value
 --]]
 
+-- DON'T EDIT BELOW THIS LINE --
+local specialFunctionId = 30 -- This special function will be reserved
+			     --  SF31 and SF32 will also be reserved
 local playSongLogicalSwitch   = 61 -- Logical switch that will play the current song
 local nextSongLogicalSwitch   = 62 -- Logical switch that will set the current song to the next one
 local prevSongLogicalSwitch   = 63 -- Logical switch that will set the current song to the previous one
 local randomSongLogicalSwitch = 64 -- Logical switch that will set the current song to a random one
-
---[[
-Using the Example above 
-SD- will Play the music 
-SD↑ would stop the song and 
-SD↓ would play a random song 
-
-Enter the Switch you will you be using to turn off the song and also play a random song BELOW
-these will be assigned to SF31 and SF32These functions will be automatically added once the 
-switch is activated the 1st time
-
-Here are the numbers for the swicthes replace the value in random and stop with the appropriate number
-
-SA↑=1, SA-=2, SA↓=3, SB↑=4, SB-=5, SB↓=6, SC↑=7, SC-=8, SC↓=9, 
-SD↑=10, SD-=11, SD↓=12, SE↑=13, SE-=14, SE↓=15, SF↑=16, SF↓=17, 
-SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22
-
---]]
-
-local random =12
-local stop =10
-
--- DON'T EDIT BELOW THIS LINE --
 
 loadScript("/SOUNDS/playlist.lua")() -- Import playlist
 
@@ -117,9 +116,6 @@ model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
 		playSong()
 		resetDone = false
 	end
-	
--- reset timer for current song
-model.setCustomFunction(30,{switch=stop,func=3,value=2,active=1})	
 
 	if songChanged then
 		resetSong()
@@ -129,8 +125,8 @@ model.setCustomFunction(30,{switch=stop,func=3,value=2,active=1})
 	
 -- Song Over
 	if model.getTimer(2).value >= playlist[playingSong][3] then --Compare the timer to the song length
-		if not nextSongSwitchPressed then			-- not added back to the vaviable
-			model.setTimer(2,{value=0})				--Resets timer to 0
+		if not nextSongSwitchPressed then			
+			model.setTimer(2,{value=0})				
 			nextSongSwitchPressed = true
 			nextScreenUpdate = true	
 			songChanged = true
@@ -154,10 +150,10 @@ model.setCustomFunction(30,{switch=stop,func=3,value=2,active=1})
 			screenUpdate = true
 			if playingSong == #playlist then
 				playingSong = 1
-				model.setTimer(2,{value=0})				--Resets timer to 0
+				model.setTimer(2,{value=0})				
 			else
 				playingSong = playingSong + 1
-				model.setTimer(2,{value=0})				--Resets timer to 0
+				model.setTimer(2,{value=0})				
 			end
 		end
 	else
@@ -167,7 +163,7 @@ model.setCustomFunction(30,{switch=stop,func=3,value=2,active=1})
 	-- Previous song
 	if getValue(prevSongSwitchId) > 0 then
 		if not prevSongSwitchPressed then
-			model.setTimer(2,{value=0})				--Resets timer to 0
+			model.setTimer(2,{value=0})				
 			prevSongSwitchPressed = true
 			nextScreenUpdate = true
 			songChanged = true
@@ -190,12 +186,11 @@ model.setCustomFunction(30,{switch=stop,func=3,value=2,active=1})
 			songChanged = true
 			screenUpdate = true
 			nextScreenUpdate = true
-			model.setCustomFunction(31,{switch=random,func=3,value=2,active=1})
+			model.setCustomFunction(31,{switch=random,func=3,value=2,active=1})--Needed since switch can be held in position awhile
 		end																	   
 	else
 		randomSongSwitchPressed = false
 	end
-
 end
 
 local function run(event)
@@ -238,7 +233,7 @@ local function run(event)
 		local long=playlist[playingSong][3]
 		local upTime=model.getTimer(2).value
 		
-		-- Title
+		-- Title 9XD
 		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
 		lcd.drawText(106, 1, "Played", SMLSIZE)
 		lcd.drawTimer(110, 9, upTime, SMLSIZE)
@@ -248,7 +243,7 @@ local function run(event)
 		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
 		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
 			
-	else -- if Taranis Q X7
+	else -- Title if Taranis Q X7
 		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
 		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
 		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
@@ -262,7 +257,6 @@ local function run(event)
 			for i = 1, #errorStrings do
 				lcd.drawText(1, yLine[i], errorStrings[i])
 			end
-
 			return
 		end
 
@@ -280,5 +274,5 @@ local function run(event)
 		if playlist[selection + 2] then lcd.drawText(1, 56, playlist[selection + 2][1], SMLSIZE) end
 	
 	end
-	end
+end
 return {run = run, background = background, init = init}
