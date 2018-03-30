@@ -42,7 +42,7 @@ SA↑=1, SA-=2, SA↓=3, SB↑=4, SB-=5, SB↓=6, SC↑=7, SC-=8, SC↓=9,
 SD↑=10, SD-=11, SD↓=12, SE↑=13, SE-=14, SE↓=15, SF↑=16, SF↓=17, 
 SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22       --]]
 
-local random =4  --Enter the switch number you will use for a random song 
+local random =12 --Enter the switch number you will use for a random song 
 --[[             Reset Timer3 will been placed on SF31 using this information automatically
 
 LS60 will list the song length of the currently playing song 
@@ -116,9 +116,6 @@ model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
 		playSong()
 		resetDone = false
 	end
-	
--- reset timer for current song
-model.setCustomFunction(30,{switch=stop,func=3,value=2,active=1})	
 
 	if songChanged then
 		resetSong()
