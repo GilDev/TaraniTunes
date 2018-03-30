@@ -32,25 +32,26 @@ SD↑ will "Pause" the song and Timer3
 
 ----Additional Functions/Information-----
 Since everything in the OpenTX is user programmable
-You need to enter the switch number to play the random song. 
-This will allow TaraniTunes to assign a reset to the song timer on this switch
+You need to enter the switch number to play the random song and what will Pause the song. 
+This will allow TaraniTunes to assign a reset and Pause to the right switches
 
 Here are the numbers for the switches 
-replace the value in "random"(below) with the appropriate number
+replace the value in "random" and "pause"(below) with the appropriate number
 
 SA↑=1, SA-=2, SA↓=3, SB↑=4, SB-=5, SB↓=6, SC↑=7, SC-=8, SC↓=9, 
 SD↑=10, SD-=11, SD↓=12, SE↑=13, SE-=14, SE↓=15, SF↑=16, SF↓=17, 
 SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22       --]]
 
 local random =12 --Enter the switch number you will use for a random song 
---[[             Reset Timer3 will been placed on SF31 using this information automatically
+local pause=6    --Enter the switch number you will used to Pause the music
+--[[            
 
 LS60 will list the song length of the currently playing song 
+
 This is updated automatically, you do not have to enter the values.
 
 BGMusic|| (pause) will be placed on SF32.
-This will be automatically inserted.
-You do not have to enter the value
+This will be automatically inserted based on the information you listed above.
 --]]
 
 -- DON'T EDIT BELOW THIS LINE --
@@ -111,7 +112,8 @@ local function background()
 
 --Autoupdates the logical swicth according to the current song selected
 model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
-
+model.setCustomFunction(32,{switch = pause,func = 17})
+	
 	if resetDone then
 		playSong()
 		resetDone = false
