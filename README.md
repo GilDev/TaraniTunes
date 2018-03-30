@@ -15,11 +15,11 @@ English instructions
 --------------------
 
 Here's a video explaining everything, from the installation to the usage.    
-It has not been updated for this version but still helpful:
+It has not been updated for this version but still helpful!
 
 [![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
 
-The installation process changed a bit, principaly the `playlist.txt` syntax, the `Logical Switches` and `Timer3`.    
+The installation process changed a bit, principaly the `playlist` syntax, the `Logical Switches` and `Timer3`.    
 These changes automatically play the next song without user input allowing you too:     
 "KEEP YOUR HANDS ON THE STICKS WHERE THEY BELONG!" while listening to music.    
 Please refer to the following instructions.
@@ -30,7 +30,7 @@ The “[Example](Example)” folder contains an example of the Taranis' SD card 
 
 1. On your computer:
 	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences (if needed) then put `iTunes.lua` in `/SCRIPT/TELEMETRY`.
-	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.lua) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME",Length},` `Song name` has a reasonble amount of room to identify the song name. `SONG_FILENAME` must be 6 characters or less. `Length` is a numeric number of seconds your song is: "EXAMPLE - Your song is 3:45 long you would enter 225.  For a 4:52 song enter 292.  Simply multiply the minutes by 60 and add the remainging seconds to determine the seconds of your song. Song length can usually be found in the file properties. Look at “[Example/SOUNDS/playlist.lua](Example/SOUNDS/playlist.lua)” for an example of formatting.  
+	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.lua) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME",Length},` `Song name` has a reasonble amount of room to identify the song name. `SONG_FILENAME` must be 6 characters or less. `Length` is a numeric number of seconds your song is: EXAMPLE - Your song is 3:45 long you would enter 225.  For a 4:52 song enter 292.  Simply multiply the minutes by 60 and add the remainging seconds to determine the seconds of your song. Song length can usually be found in the file properties. Look at “[Example/SOUNDS/playlist.lua](Example/SOUNDS/playlist.lua)” for an example of formatting.  
 	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the same folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great. Remember the filename must be 6 characters or less or it will not play. 
 	4. Activate "Timer3" using the trigger you set to `Play` the song.  Set it to count up and silence any minute calls for this timer. You may have to come back to this step after you finalize the settings in your radio to ensure the correct trigger is assigned.
 
@@ -65,11 +65,15 @@ From the main screen, hold “Page” to access TaraniTunes. If everything has b
 French instructions
 -------------------
 
-Voici une vidéo en Anglais qui explique tout, de l'installation à l'utilisation :
+Voici une vidéo en Anglais qui explique tout, de l'installation à l'utilisation :    
+Il n'a pas été mis à jour pour cette version mais toujours utile!
 
 [![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
 
-Le processus d'installation a légèrement changé, notamment la syntaxe du fichier `playlist.txt`. Veuillez vous référer aux instructions suivantes.
+Le processus d'installation a légèrement changé, notamment la syntaxe du fichier `playlist`, les `Logical Switches` et `Timer3`.    
+Ces changements jouent automatiquement la chanson suivante sans intervention de l'utilisateur vous permettant aussi:    
+"GARDEZ VOS MAINS SUR LES BÂTONS O WH ILS APPARTIENNENT!" en écoutant de la musique.    
+Veuillez vous référer aux instructions suivantes.
 
 ### Installation
 
@@ -77,20 +81,23 @@ Le dossier « [Example](Example) » contient un exemple de la structure de l
 
 1. Sur votre ordinateur :
 
-1. Éditer [`iTunes.lua`](iTunes.lua) selon vos préférences, si nécessaire, et mettre ensuite `iTunes.lua` dans le dossier `/SCRIPT/TELEMETRY` ».
-2. Créer un fichier [`playlist.lua`](Example/SOUNDS/playlist.txt) dans `/SOUNDS` dans lequel chaque ligne doit suivre le format suivant : `{"Nom du morceau", "NOM_DU_FICHIER",longueur},` où `NOM_DU_FICHIER` doit faire 6 caractères maximum. Regardez « [Example/SOUNDS/playlist.txt](Example/SOUNDS/playlist.txt) » pour un exemple de fichier correctement formaté.   La longueur est un nombre numérique de secondes votre chanson est "EXAMPLE - la chanson est 3:45 longtemps vous entreriez 225. pour une chanson de 4:52 entrez 292.
-3. Mettre les morceaux correspondants `NOM_DU_FICHIER.wav` dans `/SOUNDS/fr` si votre radio est en français (sinon remplacez `fr` par votre langue, le dossier dans lequel vous placez vos autres sons). Ceux-ci doivent être converti en mono, préférablement normalisés, et encodés au format WAV Microsoft 16-bits non signé PCM à une fréquence d'échantillonnage de 32 kHz, comme les autres sons que vous utilisez. Vous pouvez utiliser [Audacity](http://www.audacityteam.org) pour faire ça, ça marche bien.
-4. Activer Timer3 en utilisant la gâchette de votre choix. (J'utilise le même déclencheur que mes autres minuteries de telle sorte que tout s'arrête quand je retourne 1 switch). Réglez-le et faites taire tous les comptes à rebours / minutes pour cette minuterie.
+	1. Éditer [`iTunes.lua`](iTunes.lua) selon vos préférences (si nécessaire) et mettre ensuite `iTunes.lua` dans le dossier `/SCRIPT/TELEMETRY` ».
+	2. Créer un fichier [`playlist.lua`](Example/SOUNDS/playlist.lua) fichier dans `/ SOUNDS` où chaque ligne doit être formatée comme ceci: `{"Nom de la chanson", "SONG_FILENAME", Longueur}`, `Nom de la chanson` a une quantité raisonnable d'espace pour identifier le nom de la chanson. `SONG_FILENAME` doit avoir 6 caractères ou moins. `Longueur` est un nombre numérique de secondes votre chanson est: EXEMPLE - Votre chanson est 3:45 longtemps vous entreriez 225. Pour une chanson 4:52 entrez 292. Il suffit de multiplier les minutes par 60 et ajouter les secondes restantes pour déterminer La durée de la chanson peut généralement être trouvée dans les propriétés du fichier Regardez “[Example/SOUNDS/playlist.lua](Example/SOUNDS/playlist.lua)” pour un exemple de formatage.   
+	3. Mettre les morceaux correspondants `NOM_DU_FICHIER.wav` dans `/SOUNDS/fr` si votre radio est en français (sinon remplacer `fr` avec votre langue, le même dossier où vous mettez vos autres fichiers son). Ceux-ci doivent être converti en mono, préférablement normalisés, et encodés au format WAV Microsoft 16-bits non signé PCM à une fréquence d'échantillonnage de 32 kHz, comme les autres sons que vous utilisez. Vous pouvez utiliser [Audacity](http://www.audacityteam.org) pour faire ça, ça marche bien.  Rappelez-vous que le nom de fichier doit contenir 6 caractères ou moins, sinon il ne sera pas lu.   
+	4. Activez "Timer3" en utilisant le déclencheur que vous avez réglé pour `Jouer` la chanson. Réglez-le pour compter et faire taire tous les appels minute pour cette minuterie. Vous devrez peut-être revenir à cette étape après avoir finalisé les paramètres de votre radio pour vous assurer que le déclencheur correct est attribué.
 
 2. Sur votre Taranis (je vais expliquer comment je règle ma radio, avec le fichier « iTunes.lua » non modifié) :
 
-1. Configurer l'écran de configuration du modèle « AFFICHAGE » comme ceci :  
-![Display settings](Screenshots/DisplaySettings.png)
-2. Configurer l'écran de configuration du modèle « INTERS LOGIQUES » comme ceci :  
-![Logical switches settings](Screenshots/LogicalSwitchesSettings.png)
-3. Configurer l'écran de configuration du modèle « PHASES DE VOL » comme ceci :  
-![Flight modes settings](Screenshots/FlightModesSettings.png)  
-Vous devez en fait régler chaque trim de gaz à « `--` » pour toutes les phases de vol que vous utilisez.
+	1. Configurer l'écran de configuration du modèle « AFFICHAGE » comme ceci :   
+	![Display settings](Screenshots/DisplaySettings.png)
+	2. Configurer l'écran de configuration du modèle « INTERS LOGIQUES » comme ceci :   
+	![Logical switch settings](Screenshots/LogicalSwitchSettings.PNG)    
+	3. Configurer l'écran de configuration du modèle « PHASES DE VOL » comme ceci :   
+	![Flight modes settings](Screenshots/FlightModesSettings.png)   
+	Vous devez en fait régler chaque trim de gaz à « `--` » pour toutes les phases de vol que vous utilisez.    
+	
+	4. Configurer l'écran de configuration du modèle "Timer3" comme ceci :  
+	![Timer settings](Screenshots/TaraniTunesTimer.PNG)   
 
 Et voilà ! La section suivante va expliquer comment se servir de TaraniTunes.
 
@@ -99,14 +106,15 @@ Et voilà ! La section suivante va expliquer comment se servir de TaraniTunes.
 Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes. Si tout a été correctement configuré, vos morceaux devraient apparaître, sinon :
 
 * Si vous avez modifié votre [`iTunes.lua`](iTunes.lua), des valeurs de configurations sont peut-être erronées.
-* La syntaxe du fichier `playlist.txt` est peut-être incorrecte. Vérifiez-la.
+* La syntaxe du fichier `playlist.lua` est peut-être incorrecte. Vérifiez-la.
 
-1. Utilisez l'encodeur (Q X7) ou les boutons « + »/« - » pour naviguer dans vos morceaux.
-2. Appuyez sur « Enter » pour sélectionner un morceau à jouer.
-3. Mettez l'interrupteur « SD » en position centrale pour démarrer la lecture. Mettez-le en position haute pour arrêter.
-4. Mettez « SD » en position basse pour sélectionner un morceau aléatoire.
-5. Vous pouvez utiliser le trim des gaz bas ou haut pour passer à la chanson suivante ou précédente respectivement.
-
+1. Utilisez l'encodeur rotatif (Q X7) ou les boutons "+" / "-" pour parcourir les morceaux.
+2. Appuyez sur "Entrée" pour choisir une chanson à jouer.
+3. Mettez l'interrupteur "SD" en position centrale pour commencer à jouer. Remettez-le en position haute pour arrêter / mettre en pause la chanson.
+4. Mettez "SD" en position basse pour sélectionner une chanson aléatoire de votre liste de lecture.
+5. Vous pouvez appuyer sur les commandes d'accélération vers le bas et vers le haut pour lire les pistes suivante et précédente respectivement.
+6. La chanson suivante jouera automatiquement et Timer3 sera remis à 0
+7. La minuterie se réinitialisera également si vous changez de chanson.   
 
 Todo
 ----
