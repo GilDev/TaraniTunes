@@ -19,8 +19,10 @@ Here's a video explaining everything, from the installation to the usage:
 [![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
 
 The installation process changed a bit, principaly the `playlist.txt` syntax. 
-There are also changes to the Logical Switches and activating Timer3 to use to automatically play the next song without user input .
+There are also changes to the Logical Switches and activating Timer3 to use to automatically play the next song without user input.
+
 "KEEPING YOUR ATTENTION ON THE STICKS WHERE THEY BELONG"!
+
 Please refer to the following instructions.
 
 ### Installation
