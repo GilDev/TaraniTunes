@@ -125,8 +125,8 @@ model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
 	
 -- Song Over
 	if model.getTimer(2).value >= playlist[playingSong][3] then --Compare the timer to the song length
-		if not nextSongSwitchPressed then			-- not added back to the vaviable
-			model.setTimer(2,{value=0})				--Resets timer to 0
+		if not nextSongSwitchPressed then			
+			model.setTimer(2,{value=0})				
 			nextSongSwitchPressed = true
 			nextScreenUpdate = true	
 			songChanged = true
@@ -150,10 +150,10 @@ model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
 			screenUpdate = true
 			if playingSong == #playlist then
 				playingSong = 1
-				model.setTimer(2,{value=0})				--Resets timer to 0
+				model.setTimer(2,{value=0})				
 			else
 				playingSong = playingSong + 1
-				model.setTimer(2,{value=0})				--Resets timer to 0
+				model.setTimer(2,{value=0})				
 			end
 		end
 	else
@@ -163,7 +163,7 @@ model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
 	-- Previous song
 	if getValue(prevSongSwitchId) > 0 then
 		if not prevSongSwitchPressed then
-			model.setTimer(2,{value=0})				--Resets timer to 0
+			model.setTimer(2,{value=0})				
 			prevSongSwitchPressed = true
 			nextScreenUpdate = true
 			songChanged = true
@@ -186,12 +186,11 @@ model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
 			songChanged = true
 			screenUpdate = true
 			nextScreenUpdate = true
-			model.setCustomFunction(31,{switch=random,func=3,value=2,active=1})
+			model.setCustomFunction(31,{switch=random,func=3,value=2,active=1})--Needed since switch can be held in position awhile
 		end																	   
 	else
 		randomSongSwitchPressed = false
 	end
-
 end
 
 local function run(event)
@@ -234,7 +233,7 @@ local function run(event)
 		local long=playlist[playingSong][3]
 		local upTime=model.getTimer(2).value
 		
-		-- Title
+		-- Title 9XD
 		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
 		lcd.drawText(106, 1, "Played", SMLSIZE)
 		lcd.drawTimer(110, 9, upTime, SMLSIZE)
@@ -244,7 +243,7 @@ local function run(event)
 		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
 		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
 			
-	else -- if Taranis Q X7
+	else -- Title if Taranis Q X7
 		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
 		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
 		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
@@ -258,7 +257,6 @@ local function run(event)
 			for i = 1, #errorStrings do
 				lcd.drawText(1, yLine[i], errorStrings[i])
 			end
-
 			return
 		end
 
@@ -276,5 +274,5 @@ local function run(event)
 		if playlist[selection + 2] then lcd.drawText(1, 56, playlist[selection + 2][1], SMLSIZE) end
 	
 	end
-	end
+end
 return {run = run, background = background, init = init}
