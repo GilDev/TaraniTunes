@@ -21,7 +21,7 @@ Here's a video explaining everything, from the installation to the usage:
 The installation process changed a bit, principaly the `playlist.txt` syntax. 
 There are also changes to the Logical Switches and activating Timer3 to use to automatically play the next song without user input.
 
-"KEEPING YOUR ATTENTION ON THE STICKS WHERE THEY BELONG"!
+"KEEPING YOUR HANDS ON THE STICKS WHERE THEY BELONG"!
 
 Please refer to the following instructions.
 
@@ -33,14 +33,14 @@ The “[Example](Example)” folder contains an example of the Taranis' SD card 
 	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences (if needed) then put `iTunes.lua` in `/SCRIPT/TELEMETRY`.
 	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.lua) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME",Length},` `Song name` has a resonble amount of room to identify the song name. `SONG_FILENAME` must be 6 characters or less. `Length` is a numeric number of seconds your song is "EXAMPLE - Your song is 3:45 long you would enter 225.  for a 4:52 song enter 292.  Multiply the minutes by 60 and add the remainging seconds to determine the seconds of your song. Song length can usually be found in the file properties. Look at “[Example/SOUNDS/playlist.lua](Example/SOUNDS/playlist.lua)” for an example of formatting.  
 	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great. Remeber the filename must be 6 characters or less or it will not play. 
-	4. Activate Timer3 using the trigger you use to Play the song.  Set it count up and silence any countdowns/minute calls for this timer. You may have to come back to this step after you finalize the settings in your radio to ensure the correct trigger is assigned.
+	4. Activate "Timer3" using the trigger you use to Play the song.  Set it count up and silence any countdowns/minute calls for this timer. You may have to come back to this step after you finalize the settings in your radio to ensure the correct trigger is assigned.
 
 2. On your Taranis (I'm going to explain how I setup my radio):
 	1. Set “DISPLAY” model's setting screen as follow:  
 	![Display settings](Screenshots/DisplaySettings.png)
 	2. Set “LOGICAL SWITCHES” model's setting screen as follows:  
-	![Logical switches settings](Screenshots/LogicalSwitchesSettings.PNG) 
-	3. Set "Timer3" settings as follows:
+	![Logical switch settings](Screenshots/LogicalSwitchSettings.PNG) 
+	3. Set "TIMER3" settings as follows:
 	![Timer settings](Screenshots/TaraniTunesTimer.PNG)   
 	4. Set “FLIGHT MODES” model's setting screen as follows:    
 	![Flight modes settings](Screenshots/FlightModesSettings.png)  
@@ -113,13 +113,11 @@ Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes
 
 Todo
 ----
-
-* Automatically play next music after the current one is finished (no idea how to do this).
-
+Automate playlist.lua creation - No Idea how to do this (at the moment)
 
 Suggestions for OpenTX's API
 ----------------------------
 
-* Constants to determine the radio type, useful when calculating switche's index because in special functions, logical switch 1 have the index 51 on Taranis X9D and 39 on Taranis Q X7.
+* Constants to determine the radio type, useful when calculating switch's index because in special functions, logical switch 1 have the index 51 on Taranis X9D and 39 on Taranis Q X7.
 * A function called when entering a telemetry screen. Useful to draw the screen *only* when needed and not every frame. Without that variable, when entering the telemetry screen more than once, the screen stays stuck onto the main screen.
 * `table.insert(table, value)` doesn't seem to work, need to use `table[#table + 1] = value` instead.
