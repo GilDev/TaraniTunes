@@ -18,4 +18,4 @@ If you haven't converted the files yet using [Audacity](http://www.audacityteam.
 ### Using the Program
 ------------
 1. Under `File` Choose 
-![`Add Directory`](Screenshot2/directory.png)
+![`directory`]( TaraniTunes/Auto_Playlist/screenshot2/directory.PNG )
