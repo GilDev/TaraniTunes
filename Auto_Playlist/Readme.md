@@ -32,14 +32,23 @@ If you haven't converted the files yet using [Audacity](http://www.audacityteam.
 ![all](screenshot2/all.PNG )
 5. Under `File` Choose "Export"        
 ![export](screenshot2/export.PNG )
-6. A screen will appear click the star to make a new conversion.
-7. name your converion make it something that you will remeber i.e `playlist` or `taranis` 
-7. If prompted to select a file to edit the file choose your favorite text editor 'notepad' works great.
-8. Delete the sample information within the file.
-9. Here is the sintax to type into the file
+6. A screen will appear click the star to make a new conversion.    
+![export](screenshot2/export1.PNG )
+7. name your converion make it something that you will remeber i.e `playlist` or `taranis`   
+![export](screenshot2/export2.PNG )
+8. A window will open to Edit your new file.
+  If prompted to select a file to edit the file choose your favorite text editor 'notepad' works great.
+  If the window does not automatically open Click the pencil /paper icon to edit the file.
+![export](screenshot2/export3.PNG )  
+9. Delete the sample information within the file.
+9. Here is the sintax to type into the file (you can also copy/paste the syntax).
 
 $filename(playlist.lua,utf-8)playlist={$loop(%_filename_ext%)    
 {"%title%","%_filename%",%_length_seconds%},$loopend()   
 }    
 
 ![syntax](screenshot2/syntax.PNG )
+
+It will ask if you want to preview your file, If so it will open in your Lua editor.    
+Copy the playlist.lua file to the correct directory that will be referenced by `"TaraniTunes"` 
+and enjoy your new playlist.
