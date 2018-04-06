@@ -61,9 +61,6 @@ local playSongLogicalSwitch   = 61 -- Logical switch that will play the current 
 local nextSongLogicalSwitch   = 62 -- Logical switch that will set the current song to the next one
 local prevSongLogicalSwitch   = 63 -- Logical switch that will set the current song to the previous one
 local randomSongLogicalSwitch = 64 -- Logical switch that will set the current song to a random one
-
-loadScript("/SOUNDS/playlist.lua")() -- Import playlist
-
 local errorOccured = false
 local screenUpdate = true
 local nextScreenUpdate = false
@@ -72,6 +69,12 @@ local selection = 1
 local songChanged = false
 local resetDone = false
 
+local base = "/SOUNDS/lists" -- base of script to call for changing playlists
+local script1 = "/1/playlist.lua"  -- path to playlist 1
+local script2 = "/2/playlist.lua"  -- path to playlist 2
+local script3 = "/3/playlist.lua"  -- path to playlist 2
+local script4 = "/4/playlist.lua"  -- path to playlist 4
+ 
 local function error(strings)
 	errorStrings = strings
 	errorOccured = true
@@ -85,6 +88,16 @@ end
 function resetSong()
 	model.setCustomFunction(specialFunctionId,{switch = -playSongSwitchId})
 end
+
+trig=getValue("ls") -- set tigger value for changing playlists
+
+if trig > 50 then  --script to evaluate which playlist
+now = script1
+else 
+now = script2
+end
+
+loadScript(base..now)()	--load new scipt values
 		
 local function init()
 	-- Calculate indexes
