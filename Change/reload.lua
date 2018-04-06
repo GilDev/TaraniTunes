@@ -1,4 +1,5 @@
-local fileToLoad="/SCRIPTS/TELEMETRY/choose.lua"
+local fileToLoad="/SCRIPTS/TELEMETRY/choose.lua" --[[this is the name of my test file 
+                if your planning to try it at this stage rename it to iTunes.lua --]]
 local active = true
 
 local thisPage={}
