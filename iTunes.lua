@@ -42,8 +42,8 @@ SA↑=1, SA-=2, SA↓=3, SB↑=4, SB-=5, SB↓=6, SC↑=7, SC-=8, SC↓=9,
 SD↑=10, SD-=11, SD↓=12, SE↑=13, SE-=14, SE↓=15, SF↑=16, SF↓=17, 
 SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22       --]]
 
-local random =12 --Enter the switch number you will use for a random song 
-local pause=6    --Enter the switch number you will used to Pause the music
+local random = 4 --Enter the switch number you will use for a random song 
+local pause = 6    --Enter the switch number you will used to Pause the music
 --[[            
 
 LS60 will list the song length of the currently playing song 
@@ -96,26 +96,8 @@ now = script1
 else 
 now = script2
 end
-
+set = trig
 loadScript(base..now)()	--load new scipt values
-		
-local function init()
-	-- Calculate indexes
-	specialFunctionId  = specialFunctionId - 1 -- SF1 is at index 0 and so on
-	if LCD_W == 212 then -- if Taranis X9D
-		playSongSwitchId = 50 + playSongLogicalSwitch
-	else -- if Taranis Q X7
-		playSongSwitchId = 38 + playSongLogicalSwitch
-	end
-	
-	nextSongSwitchId   = getFieldInfo("ls" .. nextSongLogicalSwitch).id
-	prevSongSwitchId   = getFieldInfo("ls" .. prevSongLogicalSwitch).id
-	randomSongSwitchId = getFieldInfo("ls" .. randomSongLogicalSwitch).id
-	
-	nextScreenUpdate = true
-	screenUpdate = true
-	songChanged = true
-end
 
 nextSongSwitchPressed   = false;
 prevSongSwitchPressed   = false;
@@ -123,10 +105,11 @@ randomSongSwitchPressed = false;
 
 local function background()
 
+
 --Autoupdates the logical swicth according to the current song selected
 model.setLogicalSwitch(59,{func=3,v1=230,v2=playlist[playingSong][3]})
 model.setCustomFunction(32,{switch = pause,func = 17})
-	
+
 	if resetDone then
 		playSong()
 		resetDone = false
@@ -207,7 +190,24 @@ model.setCustomFunction(32,{switch = pause,func = 17})
 		randomSongSwitchPressed = false
 	end
 end
-
+local function init()
+ 
+	-- Calculate indexes
+	specialFunctionId  = specialFunctionId - 1 -- SF1 is at index 0 and so on
+	if LCD_W == 212 then -- if Taranis X9D
+		playSongSwitchId = 50 + playSongLogicalSwitch
+	else -- if Taranis Q X7
+		playSongSwitchId = 38 + playSongLogicalSwitch
+	end
+	
+	nextSongSwitchId   = getFieldInfo("ls" .. nextSongLogicalSwitch).id
+	prevSongSwitchId   = getFieldInfo("ls" .. prevSongLogicalSwitch).id
+	randomSongSwitchId = getFieldInfo("ls" .. randomSongLogicalSwitch).id
+	
+	nextScreenUpdate = true
+	screenUpdate = true
+	songChanged = true
+end
 local function run(event)
 
 	-- INPUT HANDLING --
@@ -290,4 +290,4 @@ local function run(event)
 	
 	end
 end
-return {run = run, background = background, init = init}
+return {run = run, background = background, init = init, run_trigger = run_trigger}
