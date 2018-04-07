@@ -7,7 +7,7 @@
 
 --Main File--
 
-See the README file for setting up the playlist.lua file
+See the README file for setting up the playlist.lua file locations and structure
 
 ----Setting up the Transmitter----	
 							
@@ -29,13 +29,14 @@ See the README file for setting up the playlist.lua file
   LS64	 OR	SD↓	SD↓ (LS64 plays random song)
  
 **Using the Example above 
-SD- will "Play" the music !! Set the trigger for timer3 in your Model Setup to match this value!!
-SD↑ will "Pause" the song and Timer3  
+SD↑ will "Pause" the song and Timer3
+SD- will "Play" the music
+SD↓ will play a "Random" song and reset timer3  
 
 ----Additional Functions/Information-----
 Since everything in the OpenTX is user programmable
-You need to enter the switch number to Pause the song. 
-This will allow TaraniTunes to assign Pause to the right switchs
+You need to enter the switch number to "Pause" the song. 
+This will allow TaraniTunes to assign "Pause" to the right switch
 
 Here are the numbers for the switches 
 replace the value in "pause"(below) with the appropriate number
@@ -45,14 +46,23 @@ SD↑=10, SD-=11, SD↓=12, SE↑=13, SE-=14, SE↓=15, SF↑=16, SF↓=17,
 SG↑=18, SG-=19, SG↓=20, SH↑=21, SH↓=22       --]]
 
 local pause =10  --Enter the switch number you will used to "Pause" the music
+				--Set the trigger for timer3 in your Model Setup to match this switch
 --[[            
-
 LS60 will list the song length of the currently playing song 
 	This is updated automatically, you do not have to enter the values.
 
 BGMusic|| (pause) will be placed on SF32.
 	This will be automatically inserted based on the information you listed above.
+	
+If you do not want all of the playlists options 
+Change the directory to read a previous playlist from the available options 
+	Example: You only want 2 play lists then change: 
+	script3 to read "/1/playlist.lua" and script4 to read "/2/playlist.lua"
 --]]
+local script1 = "/1/playlist.lua"  -- path to playlist 1
+local script2 = "/2/playlist.lua"  -- path to playlist 2
+local script3 = "/3/playlist.lua"  -- path to playlist 2
+local script4 = "/4/playlist.lua"  -- path to playlist 4
 
 -- DON'T EDIT BELOW THIS LINE --
 
@@ -71,10 +81,6 @@ local playingSong = 1
 local selection = 1
 local songChanged = false
 local resetDone = false
-local script1 = "/1/playlist.lua"  -- path to playlist 1
-local script2 = "/2/playlist.lua"  -- path to playlist 2
-local script3 = "/3/playlist.lua"  -- path to playlist 2
-local script4 = "/4/playlist.lua"  -- path to playlist 4
 
  -- control functions
 local function error(strings)
@@ -127,7 +133,7 @@ local function background()
 	end
 	
 -- Song Over
-	if model.getTimer(2).value >= playlist[playingSong][3] then --Compare the timer to the song length
+	if model.getTimer(2).value >= playlist[playingSong][3] then 
 		if not nextSongSwitchPressed then			
 			model.setTimer(2,{value=0})				
 			nextSongSwitchPressed = true
@@ -135,11 +141,9 @@ local function background()
 			songChanged = true
 			screenUpdate = true
 			if playingSong == #playlist then
-				playingSong = 1
-			else
+				playingSong = 1	else
 				playingSong = playingSong + 1
-			end
-			else 
+			end	else 
 		nextSongSwitchPressed = false
 		end	
 	end	
@@ -153,7 +157,7 @@ local function background()
 			screenUpdate = true
 			if playingSong == #playlist then
 				playingSong = 1
-				model.setTimer(2,{value=0})				
+				model.setTimer(2,{value=0})		
 			else
 				playingSong = playingSong + 1
 				model.setTimer(2,{value=0})				
