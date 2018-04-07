@@ -1,9 +1,11 @@
-TaraniTunes v.2.1 have to finish the write up for the new version
-auto playlist creator
-multiple playlists
+TaraniTunes v2.1    
+have to finish the write up for the new version   
+auto playlist creator   
+multiple playlists   
 ===========
 
 *Awesome music player for FrSky Taranis radios.*
+Now with option for changing playlists like changing radio stations
 
 Compatible with FrSky's [Taranis Q X7](https://www.frsky-rc.com/product/taranis-q-x7-2), [Taranis X9D](https://www.frsky-rc.com/product/taranis-x9d-plus-2) and their variants.
 You need at least [OpenTX](http://www.open-tx.org) 2.2.
@@ -28,11 +30,21 @@ Please refer to the following instructions.
 
 ### Installation
 
-The “[Example](Example)” folder contains an example of the Taranis' SD card structure you must follow. It works, you can, if you want, merge it with your Taranis' current SD card content. You currently need to have at least 5 songs for the script to work.
+The “[Example](Example)” folder contains an example of the Taranis' SD card structure you must follow. It works, you can, if you want, merge it with your Taranis' current SD card content. You currently need to have at least 5 songs for the script to work.  All of the music remains in `/SOUNDS` but there is a new directory structure for the playlists.
 
 1. On your computer:
-	1. Edit [`iTunes.lua`](iTunes.lua) according to your preferences (if needed) then put `iTunes.lua` in `/SCRIPT/TELEMETRY`.
-	2. Create a [`playlist.lua`](Example/SOUNDS/playlist.lua) file in `/SOUNDS` where each line must be formatted like this: `{"Song name", "SONG_FILENAME",Length},` `Song name` has a reasonble amount of room to identify the song name. `SONG_FILENAME` must be 6 characters or less. `Length` is a numeric number of seconds your song is: EXAMPLE - Your song is 3:45 long you would enter 225.  For a 4:52 song enter 292.  Simply multiply the minutes by 60 and add the remainging seconds to determine the seconds of your song. Song length can usually be found in the file properties. Look at “[Example/SOUNDS/playlist.lua](Example/SOUNDS/playlist.lua)” for an example of formatting.  
+	1. Edit [`main.lua`](main.lua) according to your preferences (if needed) then put `main.lua` and `iTunes.lua` in `/SCRIPT/TELEMETRY`.
+	2. Create directories/folders for each playlist in the `/SOUNDS` folder.
+	3. Create /SOUNDS/lists/1
+	4. Create /SOUNDS/lists/2
+	5. Create /SOUNDS/lists/3
+	6. Create /SOUNDS/lists/4
+2. Create a [`playlist.lua`](Example/SOUNDS/lists/1/playlist.lua) file in each directory/folder.
+	1. I recommend using Mp3tag to create your playlists It will automatically add the required information in the format compatible with `TaraniTunes`see the instructions in [`Auto_playlist`](/Auto_Playlist)
+	2.  If you prefer to manually create the playlist files. Each line must be formatted like this: `{"Song name", "SONG_FILENAME",Length},` 
+		1. `Song name` has a reasonble amount of room to identify the song name. 
+		2. `SONG_FILENAME` must be 6 characters or less. 
+		3. `Length` is a numeric number of seconds your song is: EXAMPLE - Your song is 3:45 long you would enter 225.  For a 4:52 song enter 292.  Simply multiply the minutes by 60 and add the remainging seconds to determine the seconds of 	your song. Song length can usually be found in the file properties. Look at “[Example/SOUNDS/playlist.lua](Example/SOUNDS	/playlist.lua)” for an example of formatting.  
 	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the same folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great. Remember the filename must be 6 characters or less or it will not play. 
 	4. Activate "Timer3" using the trigger you set to `Play` the song.  Set it to count up and silence any minute calls for this timer. You may have to come back to this step after you finalize the settings in your radio to ensure the correct trigger is assigned.
 
