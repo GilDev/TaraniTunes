@@ -1,4 +1,6 @@
-TaraniTunes v.2.01
+TaraniTunes v.2.1 have to finish the write up for the new version
+auto playlist creator
+multiple playlists
 ===========
 
 *Awesome music player for FrSky Taranis radios.*
