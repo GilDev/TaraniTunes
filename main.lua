@@ -99,13 +99,13 @@ function resetSong()
 end
 
 --script trigger
-  if set1 == 4 then 
-  set2 = script1 else
-  if set1 == 3 then 
-  set2 = script2 else
+  if set1 == 1 then 
+  set2 = script4 else
   if set1 == 2 then 
   set2 = script3 else
-  set2 = script4
+  if set1 == 3 then 
+  set2 = script2 else
+  set2 = script1
   end
   end
   end   
