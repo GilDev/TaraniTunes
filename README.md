@@ -1,7 +1,7 @@
-TaraniTunes v2.1    
+TaraniTunes v2.1 
 ===========
-        *Awesome music player for FrSky Taranis radios.*    
-* <b>Now allowing YOU to change playlists like changing radio stations!</b>
+    *Awesome music player for FrSky Taranis radios.*
+* !! Now featuring <b>4 selectable "PLAYLISTs"</b> to enjoy !!
 
 Compatible with FrSky's [Taranis Q X7](https://www.frsky-rc.com/product/taranis-q-x7-2), [Taranis X9D](https://www.frsky-rc.com/product/taranis-x9d-plus-2) and their variants.
 You need at least [OpenTX](http://www.open-tx.org) 2.2.
@@ -46,11 +46,11 @@ The “[Example](Example)” folder contains an example of the Taranis' SD card 
 		EXAMPLE - Your song is 3:45 long you would enter 225. For a 4:52 song enter 292.    
 		Simply multiply the minutes by 60 and add the remaining seconds to determine the seconds of your song. Song length can usually be found in the file properties.   
 		Look at “[Example/SOUNDS/lists/1/playlist.lua](Example/SOUNDS/lists/1/playlist.lua)” for an example of formatting.  
-	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language, the same folder where you put your other sound files). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great. Remember the filename must be 6 characters or less or it will not play. 
+	3. Put your corresponding songs `SONG_FILENAME.wav` in `/SOUNDS/en` if your radio is in English (otherwise replace `en` with your language). They must be converted to mono, preferably normalized, and encoded in Microsoft WAV 16-bits signed PCM at a 32 kHz sampling rate, you can use [Audacity](http://www.audacityteam.org) to do that, it works great. Remember the filename must be 6 characters or less or it will not play. 
 	4. Activate "Timer3" using the trigger you set to `Play` the song. Set it to count up and silence any minute calls for this timer. You may have to come back to this step after you finalize the settings in your radio to ensure the correct trigger is assigned.
 
 2. On your Taranis (I'm going to explain how I setup my radio):
-	1. Set “DISPLAY” model's setting screen as follow:  
+	1. Set “DISPLAY” model's setting screen as follows:  
 	![Display settings](Screenshots/DisplaySettings.png)
 	2. Set “LOGICAL SWITCHES” model's setting screen as follows:  
 	![Logical switch settings](Screenshots/LogicalSwitchSettings.PNG) 
@@ -60,7 +60,7 @@ The “[Example](Example)” folder contains an example of the Taranis' SD card 
 	4. Set "TIMER3" settings as follows:      
 	![Timer settings](Screenshots/TaraniTunesTimer.PNG)   
 
-There you go! Next section will explain you how to use TaraniTunes.
+There you go! Next section will explain how to use TaraniTunes.
 
 ### Usage
 
@@ -81,7 +81,8 @@ From the main screen, hold “Page” to access TaraniTunes. If everything has b
 
 * The playlist contained in /list/1 will always load when TaraniTunes is started.
 1. To change playlists press "MENU".
-2. A `Change Playlist Screen` will appear.
+2. A `Change Playlist Screen` will appear.    
+![Change Playlist](Screenshots/ChangeList.png)     
 3. Using **Rotary Switch S2** select the playlist 1 thru 4 you want to choose.
 4. Press "ENTER"
 Your new playlist is loaded and begins playing.
@@ -89,7 +90,7 @@ Your new playlist is loaded and begins playing.
 
 Instructions en Français
 -------------------
-* <b>VOUS permettant maintenant de modifier les listes de lecture comme changer de station de radio<b>
+* Maintenant avec <b> 4 "PLAYLIST" sélectionnables </ b> pour profiter
 
 Voici une vidéo en Anglais qui explique tout, de l'installation à l'utilisation :    
 Il n'a pas été mis à jour pour cette version mais toujours utile!
@@ -137,7 +138,6 @@ Le dossier "[Example](Example)" contient un exemple de la structure de la carte 
 	3. Configurer l'écran de configuration du modèle « PHASES DE VOL » comme ceci :   
 	![Flight modes settings](Screenshots/FlightModesSettings.png)   
 	Vous devez en fait régler chaque trim de gaz à « `--` » pour toutes les phases de vol que vous utilisez.    
-	
 	4. Configurer l'écran de configuration du modèle "Timer3" comme ceci :  
 	![Timer settings](Screenshots/TaraniTunesTimer.PNG)   
 
@@ -161,14 +161,15 @@ Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes
 ### Changer les playlists
 * La liste de lecture contenue dans /list/1 est toujours chargée lorsque TaraniTunes est démarré.
 1. Pour changer de liste de lecture, appuyez sur "MENU".
-2. Un `Change Playlist Screen` apparaîtra.
+2. Un `Change Playlist Screen` apparaîtra.    
+![Change Playlist](Screenshots/ChangeList.png)     
 3. En utilisant **Commutateur Rotatif S2**, sélectionnez la liste de lecture 1 à 4 que vous voulez choisir.
 4. Appuyez sur "ENTER"
 Votre nouvelle liste de lecture est chargée et commence à jouer.
 
 Todo
 ----
-Awaiting User Feedback for Improvments
+Awaiting user feedback for improvments
 
 Suggestions for OpenTX's API
 ----------------------------
