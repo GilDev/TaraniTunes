@@ -52,13 +52,10 @@ local randomS =12 -- Inserts the "Reset Timer3" according to your switch assignm
 LS60 will list the song length of the currently playing song 
 	This is updated automatically, you do not have to enter the values.
 
-BGMusic|| (pause) will be placed on SF32.
-	This will be automatically inserted based on the information you listed above.
-	
 If you do not want all of the playlists options 
-Change the directory to read a previous playlist from the available options 
+Change the directory to read a different playlist from the available options 
 	Example: You only want 2 play lists then change: 
-	script3 to read "/1/playlist.lua" and script4 to read "/2/playlist.lua"
+	script2 to read "/1/playlist.lua" and script3 and script4 to read "/2/playlist.lua"
 --]]
 local script1 = "/1/playlist.lua"  -- path to playlist 1
 local script2 = "/2/playlist.lua"  -- path to playlist 2
@@ -68,7 +65,6 @@ local script4 = "/4/playlist.lua"  -- path to playlist 4
 -- DON'T EDIT BELOW THIS LINE --
 
 -- locals
-
 local specialFunctionId = 30 -- This special function will be reserved
 			     --  SF31 and SF32 will also be reserved
 local playSongLogicalSwitch   = 61 -- Logical switch that will play the current song
@@ -101,13 +97,13 @@ end
 --script trigger
   if set1 == 1 then 
   set2 = script4 else
-  if set1 == 2 then 
-  set2 = script3 else
-  if set1 == 3 then 
-  set2 = script2 else
-  set2 = script1
-  end
-  end
+  	if set1 == 2 then 
+  	set2 = script3 else
+  		if set1 == 3 then 
+  		set2 = script2 else
+  		set2 = script1
+  		end
+  	end
   end   
 
 loadScript("/SOUNDS/lists"..set2)()	--load new script values
@@ -255,13 +251,12 @@ local function run(event)
 	if screenUpdate or event == 191 then -- 191 is the event code when entering the telemetry screen
 		screenUpdate = true
 
-		lcd.clear();
-		
+	lcd.clear();
+	local long=playlist[playingSong][3]
+	local upTime=model.getTimer(2).value		
 		-- Calculate indexes for screen display
 	if LCD_W == 212 then -- if Taranis X9D	
-		local long=playlist[playingSong][3]
-		local upTime=model.getTimer(2).value
-		
+				
 		-- Title 9XD
 		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
 		lcd.drawText(106, 1, "Played", SMLSIZE)
@@ -273,9 +268,14 @@ local function run(event)
 		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
 			
 	else -- Title if Taranis Q X7
-		lcd.drawText(1, 1, "TaraniTunes", MIDSIZE)
-		lcd.drawText(LCD_W - 19, 1, "By", SMLSIZE)
-		lcd.drawText(LCD_W - 27, 9, "GilDev", SMLSIZE)
+		lcd.drawText(1, 1, "TaraniTunes")
+		lcd.drawText(8, 9, "Played", SMLSIZE)
+		lcd.drawTimer(40, 9, upTime, SMLSIZE)
+		lcd.drawText(68, 9, string.char(62),SMLSIZE)
+		lcd.drawText(LCD_W - 53, 9, "Song", SMLSIZE)
+		lcd.drawTimer(LCD_W - 30, 9, long, SMLSIZE)
+		lcd.drawText(LCD_W - 45, 1, "By:", SMLSIZE)
+		lcd.drawText(LCD_W - 29, 1, "GilDev", SMLSIZE)
 	end
 		-- Separator
 		lcd.drawLine(0, 16, LCD_W - 1, 16, SOLID, FORCE)
@@ -298,7 +298,7 @@ local function run(event)
 		-- Song selector
 		if playlist[selection - 2] then lcd.drawText(1, 28, playlist[selection - 2][1], SMLSIZE) end
 		if playlist[selection - 1] then lcd.drawText(3, 35, playlist[selection - 1][1], SMLSIZE) end
-		if playlist[selection]     then lcd.drawText(1, 42, string.char(126) .. playlist[selection][1], SMLSIZE) end
+		if playlist[selection] then lcd.drawText(1, 42, string.char(126) .. playlist[selection][1], SMLSIZE) end
 		if playlist[selection + 1] then lcd.drawText(3, 49, playlist[selection + 1][1], SMLSIZE) end
 		if playlist[selection + 2] then lcd.drawText(1, 56, playlist[selection + 2][1], SMLSIZE) end
 	
