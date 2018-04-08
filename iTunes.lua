@@ -5,8 +5,7 @@
  By GilDev
  http://gildev.tk
 
-See the README file(s) for setting up the "main.lua" file 
-Also be sure to read about automated playlist creation
+See the seperate README file(s) for setting up the "main.lua" file and automated playlist creation
 
 -----Playlist trigger/reset file----------
 ------------do not edit below this line--------------]]
