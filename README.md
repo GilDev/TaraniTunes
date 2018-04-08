@@ -1,7 +1,7 @@
 TaraniTunes v2.1    
 ===========
         *Awesome music player for FrSky Taranis radios.*    
-* <b>Allowing YOU to change playlists like changing radio stations!</b>
+* <b>Now allowing YOU to change playlists like changing radio stations!</b>
 
 Compatible with FrSky's [Taranis Q X7](https://www.frsky-rc.com/product/taranis-q-x7-2), [Taranis X9D](https://www.frsky-rc.com/product/taranis-x9d-plus-2) and their variants.
 You need at least [OpenTX](http://www.open-tx.org) 2.2.
@@ -37,7 +37,7 @@ The “[Example](Example)” folder contains an example of the Taranis' SD card 
 	5. Create /SOUNDS/lists/3
 	6. Create /SOUNDS/lists/4
 2. Create a [`playlist.lua`](Example/SOUNDS/lists/1/playlist.lua) file in each directory/folder.
-	1. I recommend using Mp3tag to create your playlists. It will automatically add the required information in the format compatible with `TaraniTunes` see the instructions in [`Auto_playlist`](/Auto_Playlist)
+	1. I recommend using [`Mp3tag`](https://www.mp3tag.de/en/index.html) to create your playlists. It will automatically add the required information in the format compatible with `TaraniTunes` see the instructions in [`Auto_playlist`](/Auto_Playlist)
 	2.  If you prefer to manually create the playlist files. Each line must be formatted like this:   
 	`{"Song name", "Song file name",Length},` 
 		1. `Song name` has a reasonble amount of room to identify the song name. 
@@ -87,27 +87,44 @@ From the main screen, hold “Page” to access TaraniTunes. If everything has b
 Your new playlist is loaded and begins playing.
 
 
-French instructions
+Instructions en Français
 -------------------
+* <b>VOUS permettant maintenant de modifier les listes de lecture comme changer de station de radio<b>
 
 Voici une vidéo en Anglais qui explique tout, de l'installation à l'utilisation :    
 Il n'a pas été mis à jour pour cette version mais toujours utile!
 
 [![TaraniTunes Instruction Video](https://img.youtube.com/vi/gCiody4izEs/0.jpg)](https://youtu.be/gCiody4izEs)
 
-Le processus d'installation a légèrement changé, notamment la syntaxe du fichier `playlist`, les `Logical Switches` et `Timer3`.    
-Ces changements jouent automatiquement la chanson suivante sans intervention de l'utilisateur vous permettant aussi:    
-"GARDEZ VOS MAINS SUR LES BÂTONS O WH ILS APPARTIENNENT!" en écoutant de la musique.    
+Le processus d'installation a changé un peu, principalement la syntaxe `playlist`, les` Switches logiques` et `Timer3`.
+Ces changements jouent automatiquement la chanson suivante sans intervention de l'utilisateur, ce qui vous permet également:
+"GARDEZ VOS MAINS SUR LES BÂTONS O WH ILS APPARTIENNENT!" en écoutant de la musique.
 Veuillez vous référer aux instructions suivantes.
 
 ### Installation
 
-Le dossier « [Example](Example) » contient un exemple de la structure de la carte SD que vous devez suivre. Ça marche, et vous pouvez, si vous le souhaitez, fusionner ce dossier avec le contenu actuel de la carte SD de votre Taranis. Vous devez pour l'instant avoir au moins 5 morceaux pour que le script marche.
+Le dossier "[Example](Example)" contient un exemple de la structure de la carte SD de Taranis que vous devez suivre. Cela fonctionne, vous pouvez, si vous voulez, le fusionner avec le contenu actuel de la carte SD de votre Taranis. Vous devez actuellement avoir au moins 5 chansons pour que le script fonctionne. Toute la musique reste dans `/SOUNDS`, mais il y a une nouvelle structure de répertoire pour les playlists.
 
 1. Sur votre ordinateur :
 
-	1. Éditer [`iTunes.lua`](iTunes.lua) selon vos préférences (si nécessaire) et mettre ensuite `iTunes.lua` dans le dossier `/SCRIPT/TELEMETRY` ».
-	2. Créer un fichier [`playlist.lua`](Example/SOUNDS/playlist.lua) fichier dans `/ SOUNDS` où chaque ligne doit être formatée comme ceci: `{"Nom de la chanson", "SONG_FILENAME", Longueur}`, `Nom de la chanson` a une quantité raisonnable d'espace pour identifier le nom de la chanson. `SONG_FILENAME` doit avoir 6 caractères ou moins. `Longueur` est un nombre numérique de secondes votre chanson est: EXEMPLE - Votre chanson est 3:45 longtemps vous entreriez 225. Pour une chanson 4:52 entrez 292. Il suffit de multiplier les minutes par 60 et ajouter les secondes restantes pour déterminer La durée de la chanson peut généralement être trouvée dans les propriétés du fichier Regardez “[Example/SOUNDS/playlist.lua](Example/SOUNDS/playlist.lua)” pour un exemple de formatage.   
+	1. Les instructions détaillées d'édition [`main.lua`](main.lua) sont dans les commentaires de fichier pour l'entrée des numéros de commutateur pour les commutateurs` Pause et Random`. Placez à la fois `main.lua` et` iTunes.lua` dans `/SCRIPT/TELEMETRY`.
+		1. Créez des répertoires/dossiers pour chaque liste de lecture dans le dossier `/SOUNDS`.
+		2. Créez /SOUNDS/lists/1
+		2. Créez /SOUNDS/lists/2
+		3. Créez /SOUNDS/lists/3
+		4. Créer /SOUNDS/lists/4
+	
+	2. Créez un fichier [`playlist.lua`](Example/SOUNDS/lists/1/playlist.lua) dans chaque répertoire/dossier.
+		1. Je recommande d'utiliser [`Mp3tag`](https://www.mp3tag.de/en/index.html) pour créer vos listes de lecture. Il ajoutera automatiquement les informations requises dans le format compatible avec `TaraniTunes` voir les instructions dans [` Auto_playlist`](/ Auto_Playlist).
+		2.Si vous préférez créer manuellement les fichiers de playlist. Chaque ligne doit être formatée comme ceci:    
+			`{" Nom de la chanson "," Nom du fichier de morceau ", Longueur},`    
+			1. `Nom de la chanson` a une quantité raisonnable d'espace pour identifier le nom de la chanson.    
+			2. Le `nom du fichier de morceau` doit comporter 6 caractères ou moins.    
+			3. `Longueur` est un nombre numérique de secondes votre chanson est:    
+			EXEMPLE - Votre chanson dure 3:45, vous entrez 225. Pour une chanson 4:52, entrez 292.    
+			Multipliez simplement les minutes par 60 et ajoutez les secondes restantes pour déterminer les secondes de votre chanson. La longueur du morceau peut généralement être trouvée dans les propriétés du fichier.    
+			Regardez "[Example/SOUNDS/lists/1/playlist.lua](Example/SOUNDS/lists/1/playlist.lua)" pour un exemple de formatage.
+	 
 	3. Mettre les morceaux correspondants `NOM_DU_FICHIER.wav` dans `/SOUNDS/fr` si votre radio est en français (sinon remplacer `fr` avec votre langue, le même dossier où vous mettez vos autres fichiers son). Ceux-ci doivent être converti en mono, préférablement normalisés, et encodés au format WAV Microsoft 16-bits non signé PCM à une fréquence d'échantillonnage de 32 kHz, comme les autres sons que vous utilisez. Vous pouvez utiliser [Audacity](http://www.audacityteam.org) pour faire ça, ça marche bien.  Rappelez-vous que le nom de fichier doit contenir 6 caractères ou moins, sinon il ne sera pas lu.   
 	4. Activez "Timer3" en utilisant le déclencheur que vous avez réglé pour `Jouer` la chanson. Réglez-le pour compter et faire taire tous les appels minute pour cette minuterie. Vous devrez peut-être revenir à cette étape après avoir finalisé les paramètres de votre radio pour vous assurer que le déclencheur correct est attribué.
 
@@ -130,7 +147,7 @@ Et voilà ! La section suivante va expliquer comment se servir de TaraniTunes.
 
 Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes. Si tout a été correctement configuré, vos morceaux devraient apparaître, sinon :
 
-* Si vous avez modifié votre [`iTunes.lua`](iTunes.lua), des valeurs de configurations sont peut-être erronées.
+* Si vous avez modifié du code supplémentaire dans [`main.lua`](main.lua), au-delà de la définition des valeurs de commutateur, certaines valeurs de configuration sont peut-être erronées.
 * La syntaxe du fichier `playlist.lua` est peut-être incorrecte. Vérifiez-la.
 
 1. Utilisez l'encodeur rotatif (Q X7) ou les boutons "+" / "-" pour parcourir les morceaux.
@@ -141,9 +158,17 @@ Depuis l'écran principal, maintenez « Page » pour accéder à TaraniTunes
 6. La chanson suivante jouera automatiquement et Timer3 sera remis à 0
 7. La minuterie se réinitialisera également si vous changez de chanson.   
 
+### Changer les playlists
+* La liste de lecture contenue dans /list/1 est toujours chargée lorsque TaraniTunes est démarré.
+1. Pour changer de liste de lecture, appuyez sur "MENU".
+2. Un `Change Playlist Screen` apparaîtra.
+3. En utilisant **Commutateur Rotatif S2**, sélectionnez la liste de lecture 1 à 4 que vous voulez choisir.
+4. Appuyez sur "ENTER"
+Votre nouvelle liste de lecture est chargée et commence à jouer.
+
 Todo
 ----
-Automate playlist.lua creation - No idea how to do this (at the moment)
+Awaiting User Feedback for Improvments
 
 Suggestions for OpenTX's API
 ----------------------------
