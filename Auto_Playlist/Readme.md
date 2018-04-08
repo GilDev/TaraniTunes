@@ -6,7 +6,7 @@
 There is already a 3rd party program to make autoplaylist and it is works perfectly 
 Credit has to go to @ridgerunner for mentioning it in his post on RCGroups.com
 
-Here is the post ["Ridgerunr" discusses Mp3Tag for creating playlists](https://www.rcgroups.com/forums/showpost.php?p=31361271&postcount=41772)
+Here is the post ["Ridgerunr" discusses Mp3tag for creating playlists](https://www.rcgroups.com/forums/showpost.php?p=31361271&postcount=41772)
 
 It took a while to get the syntax exactly right for use in TarniTunes so here are the short directions to get you started.
 
