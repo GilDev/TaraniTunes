@@ -7,8 +7,8 @@ TaraniTunes
 > [jrwieland](https://github.com/jrwieland) made quite a lot of improvements to TaraniTunes: he added playlists, automatic song switching, and more.  
 > It’s a little bit more complicated to set up, but I strongly recommand you to check out [his fork](https://github.com/jrwieland/TaraniTunes) if you are interested by these features!
 
-Compatible with FrSky’s [Taranis Q X7](https://www.frsky-rc.com/product/taranis-q-x7-2), [Taranis X9D](https://www.frsky-rc.com/product/taranis-x9d-plus-2) and their variants.
-You need at least [OpenTX](http://www.open-tx.org) 2.2.
+Compatible with FrSky’s [Taranis Q X7](https://www.frsky-rc.com/product/taranis-q-x7-2), [Taranis X9D](https://www.frsky-rc.com/product/taranis-x9d-plus-2) and probably their variants.
+You need [OpenTX](http://www.open-tx.org) 2.3.x or later (tested on 2.3.7).
 
 * Taranis Q X7  
   ![Taranis Q X7](Screenshots/TaraniTunesQX7.png)

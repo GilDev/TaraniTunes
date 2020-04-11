@@ -76,9 +76,9 @@ local function init()
 	-- Calculate indexes
 	specialFunctionId  = specialFunctionId - 1 -- SF1 is at index 0 and so on
 	if LCD_W == 212 then -- if Taranis X9D
-		playSongSwitchId = 50 + playSongLogicalSwitch
+		playSongSwitchId = 53 + playSongLogicalSwitch
 	else -- if Taranis Q X7
-		playSongSwitchId = 38 + playSongLogicalSwitch
+		playSongSwitchId = 44 + playSongLogicalSwitch
 	end
 	nextSongSwitchId   = getFieldInfo("ls" .. nextSongLogicalSwitch).id
 	prevSongSwitchId   = getFieldInfo("ls" .. prevSongLogicalSwitch).id
